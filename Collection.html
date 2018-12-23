@@ -261,6 +261,174 @@
       });
 
     });
+		
+	function Collection()
+	{
+	
+		function Save(reqId, reqType, name, description, publicStatus, userInfo, userId)
+		{	
+			var objParam =
+			{
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam":
+				{
+					"name": name,
+					"description": description,
+					"publicStatus": publicStatus,
+				},
+				"reqUserInfo": userInfo,
+				"userId": userId
+			}
+			
+			$.ajax
+			({     
+                url: "http://120.79.191.240:8089/rssbackend/api/v1/collection",     
+                data: objParam,     
+                datatype: "json",  
+                type: "POST",     
+                contentType: "application/json", 
+                success:function(result) 					
+				{
+					var objResult = JSON.parse(result); 
+						
+					// 在这里将返回信息插入到HTML中
+						
+                }    
+            });     
+		}	
+
+		function AddEntry(reqId, reqType, collectionId, entryId) 
+		{
+			var objParam = 
+			{
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam":
+				{
+					"collectionId": collectionId,
+					"entryId": entryId
+				}
+			}
+			
+			$.ajax
+			({     
+                url: "http://120.79.191.240:8089/rssbackend/api/v1/addEntry",
+                data: objParam,     
+                datatype: "json",  
+                type: "POST",     
+                contentType: "application/json", 
+                success:function(result) 					
+				{
+					var objResult = JSON.parse(result); 
+						
+					// 在这里将返回信息插入到HTML中
+						
+                }    
+            });   
+			
+		}
+		
+		function ChangeStatus(reqId, reqType, collectionId, status) 
+		{
+			var objParam = 
+			{
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam":
+				{
+					"collectionId": collectionId,
+					"publicStatus": status
+				}
+			}
+			
+			$.ajax
+			({     
+                url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/changeStatus",
+                data: objParam,     
+                datatype: "json",  
+                type: "POST",     
+                contentType: "application/json", 
+                success:function(result) 					
+				{
+					var objResult = JSON.parse(result); 
+						
+					// 在这里将返回信息插入到HTML中
+						
+                }    
+            });   
+			
+		}
+		
+		function Update(reqId, reqType, name, description, status, collectionId) 
+		{
+			var objParam = 
+			{
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam":
+				{
+					"name": name,
+					"description": description,
+					"publicStatus": status
+					"collectionId": collectionId,
+				}
+			}
+			
+			$.ajax
+			({     
+                url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/update",
+                data: objParam,     
+                datatype: "json",  
+                type: "POST",     
+                contentType: "application/json", 
+                success:function(result) 					
+				{
+					var objResult = JSON.parse(result); 
+						
+					// 在这里将返回信息插入到HTML中
+						
+                }    
+            });   
+			
+		}
+		
+		function ListAllPublic(reqId, reqType, device, pageSize, pageNum) 
+		{
+			// device can be 'pc' or 'mobile'
+		
+			var objParam = 
+			{
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam":
+				{
+					"device": device
+				}
+				"reqPageInfo":
+				{
+					"pageSize": pageSize,
+					"pageNum": pageNum
+				}
+			}
+			
+			$.ajax
+			({     
+                url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/allPublic",
+                data: objParam,     
+                datatype: "json",  
+                type: "POST",     
+                contentType: "application/json", 
+                success:function(result) 					
+				{
+					var objResult = JSON.parse(result); 
+						
+					// 在这里将返回信息插入到HTML中
+						
+                }    
+            });   			
+		}
+	}
     
   </script>
 
