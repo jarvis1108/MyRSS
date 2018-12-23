@@ -304,62 +304,6 @@
   <script src="assets/js/jquery.min.js"></script>
   <!--<![endif]-->
   <script src="assets/js/amazeui.min.js"></script>
-
-  <script>
-    $(function () {
-      $('#collection-prompt-toggle').on('click', function () {
-        $('#collection-prompt').modal({
-          relatedTarget: this,
-          onConfirm: function (e) {
-            alert('你输入的是：' + e.data || '')
-          }
-        });
-      });
-
-      $('#collection-remove-toggle').on('click', function () {
-        $('#remove-confirm').modal({
-          relatedTarget: this,
-          onConfirm: function () {
-            alert("已成功删除！");
-          },
-          onCancel: function () {
-          }
-        });
-      });
-
-      $('#collection-edit-toggle').on('click', function () {
-        $('#edit-confirm').modal({
-          relatedTarget: this,
-          onConfirm: function () {
-            alert("信息已保存");
-          },
-          onCancel: function () {
-          }
-        });
-      });
-
-      $('#collection-new-toggle').on('click', function () {
-        $('#new-confirm').modal({
-          relatedTarget: this,
-          closeOnConfirm:false,
-          onConfirm: function (e) {
-            if(e.data!=""){
-              alert("创建成功");
-              $('#new-confirm').modal('close');
-            }else{
-              alert("请输入收藏夹名字");
-            }
-          },
-          onCancel: function () {
-          }
-        });
-      });
-
-    });
-
-  </script>
-
-
 </body>
 
 </html>

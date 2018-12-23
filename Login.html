@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <meta charset="UTF-8">
+  <title>Login | My RSS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+  <style>
+    .header {
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 200%;
+      color: #333;
+      margin-top: 30px;
+    }
+    .header p {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+	<!-- header -->
+	  <header class="am-topbar">
+	    <h1 class="am-topbar-brand">
+	      <a href="#">My RSS</a>
+	    </h1>
+	
+	    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
+	        class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+	
+	    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+	      <ul class="am-nav am-nav-pills am-topbar-nav">
+	        <li><a href="#">首页</a></li>
+	        <li class="am-active"><a href="Collection.html">收藏</a></li>
+	        <li><a href="#">小组</a></li>
+	      </ul>
+	
+	      <div class="am-topbar-right">
+	        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+	      </div>
+	    </div>
+	  </header>
+<div class="header">
+  <div class="am-g">
+    <h1>My RSS</h1>
+    <p>Really Simple Syndication<br/>源于生活，便于生活</p>
+  </div>
+  <hr />
+</div>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <form method="post" class="am-form">
+      <label for="username">用户名:</label>
+      <input type="text" name="" id="username" value="abcd">
+      <br>
+      <label for="password">密码:</label>
+      <input type="password" name="" id="password" value="123456">
+      <br>
+      <div class="am-cf">
+        <input type="submit" id="submit" name="" value="登陆" class="am-btn am-btn-primary am-round am-btn-block am-fl" onclick="Login()">
+      </div>
+    </form>
+    <br>
+	<hr>
+    <p>© 2018 My rss.</p>
+  </div>
+</div>
+<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+	function Login()
+	{
+		// 根据程志强给的文档JSDoc::User构造objParam对象
+		var reqId = "1";
+		var reqType = "Login";
+		var name = document.getElementById("username").value;		
+		var password = document.getElementById("password").value;
+		
+		var objParam = 
+		{
+			"reqId": reqId,
+			"reqType": reqType,
+			"reqParam":
+			{
+				"username": name,
+				"password": password
+			}
+		};
+				
+		// 调用ajax与服务器连接（该语法需要jQuery，所以必须有“<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>”）
+		$.ajax
+		({     
+            url: "http://120.79.191.240:8089/rssbackend/api/v1/user/login",	//这个URL地址也需要根据文档来确定
+            data: JSON.stringify(objParam),     							//传递objParam时要转换成string
+            datatype: "json",  
+            type: "POST",  													//根据文档确定用GET还是POST  	
+            contentType: "application/json", 
+            success:function(objResult) 					
+			{
+				//在这里得到objResult，它也是json对象，其定义参考文档				
+
+				//根据业务逻辑这里需要跳转到Collection.html，则如下操作(并传递userId）				
+				window.location.href="Collection.html"+"?userId="+objResult.resResult.curData.userId;
+				
+				//如果业务逻辑需要更新HTML，例如要在<div id="aaa"></div>中插入bbb：
+				//document.getElementById('aaa').innerHTML = bbb
+            },
+			error: function(XMLHttpRequest, textStatus, errorThrown)
+			{     
+				//如果连接出错会执行这里，输出status来得到错误代码，然后分析原因
+				//（有时这个alert弹窗会一闪而过，所以需要在调试模式下才能看到弹窗）
+				alert(XMLHttpRequest.status);
+            }     			
+        });   			
+	}
+</script>
+</body>
+</html>
