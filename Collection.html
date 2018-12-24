@@ -95,23 +95,23 @@
 
   <!-- header -->
   <header class="am-topbar">
-      <h1 class="am-topbar-brand">
-        <a href="#">My RSS</a>
-      </h1>
-  
-      <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
-          class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
-  
-      <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
-        <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
-          <li><a href="#">首页</a></li>
-          <li><a href="Collection.html">收藏</a></li>
-          <li><a href="#">小组</a></li>
-          <li><a href="Personal_information.html">个人信息</a></li>
-        </ul>
-      </div>
-    </header>
-  
+    <h1 class="am-topbar-brand">
+      <a href="#">My RSS</a>
+    </h1>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
+        class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+      <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
+        <li><a href="#">首页</a></li>
+        <li><a href="Collection.html">收藏</a></li>
+        <li><a href="#">小组</a></li>
+        <li><a href="Personal_information.html">个人信息</a></li>
+      </ul>
+    </div>
+  </header>
+
 
   <div class="am-g am-g-fixed blog-g-fixed">
     <!-- catalogue -->
@@ -121,14 +121,14 @@
           <div class="am-panel-hd">关于收藏</div>
           <div class="am-panel-bd">
             <p>我们在首页上为你推荐了最新的RSS文章，你可以收藏到这里，以备以后查看。</p>
-            <p>你也可以在这里导入自己的RSS。</p>
-            <button type="button" class="am-btn am-btn-success am-btn-sm" id="entry-save-toggle">导入RSS</button>
+            <p>你也可以在这里导入自己喜欢的文章。</p>
+            <button type="button" class="am-btn am-btn-success am-btn-sm" id="entry-save-toggle">导入文章</button>
           </div>
 
           <!-- save entry-->
           <div class="am-modal am-modal-prompt" tabindex="-1" id="save-confirm">
             <div class="am-modal-dialog">
-              <div class="am-modal-hd">导入RSS</div>
+              <div class="am-modal-hd">导入文章</div>
               <div class="am-modal-bd">
                 请将需要导入的文章链接粘贴到下方文本框内
                 <input type="text" class="am-modal-prompt-input">
@@ -145,7 +145,7 @@
             <a class="collection-list-add" id="collection-new-toggle">新建</a>
           </div>
           <ul class="am-nav collection-list" id="mylist">
-             <!-- collection list -->
+            <!-- collection list -->
           </ul>
 
           <!-- new collection -->
@@ -211,7 +211,7 @@
             <div class="am-modal-hd">编辑收藏夹</div>
             <div class="am-modal-bd">
               <label class="edit-label">名字</label>
-              <input type="text" class="am-modal-prompt-input" id="edit-title" value="默认收藏夹">
+              <input type="text" class="am-modal-prompt-input" id="edit-title" value="">
             </div>
             <div class="am-modal-bd">
               <label class="edit-label">权限</label>
@@ -252,17 +252,17 @@
 
       <!-- entry delete -->
       <div class="am-modal am-modal-confirm" tabindex="-1" id="entry-delete-confirm">
-          <div class="am-modal-dialog">
-            <div class="am-modal-hd">删除文章</div>
-            <div class="am-modal-bd">
-              你确定要删除这篇文章吗？
-            </div>
-            <div class="am-modal-footer">
-              <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-              <span class="am-modal-btn" data-am-modal-confirm>确定</span>
-            </div>
+        <div class="am-modal-dialog">
+          <div class="am-modal-hd">删除文章</div>
+          <div class="am-modal-bd">
+            你确定要删除这篇文章吗？
+          </div>
+          <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
           </div>
         </div>
+      </div>
 
       <ul class="am-pagination blog-pagination">
         <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
@@ -289,14 +289,14 @@
   <!--<![endif]-->
   <!-- <script src="assets/js/amazeui.min.js"></script> -->
 
-  <script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
   <script src="assets/js/amazeui.min.js"></script>
 
   <script>
     licolection = document.getElementById("nav").childNodes;
     for (i = 0; i < licolection.length / 2; ++i) {
-      element = licolection[i*2 + 1].childNodes[0];
+      element = licolection[i * 2 + 1].childNodes[0];
       element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
     }
   </script>
@@ -318,12 +318,7 @@
         $('#collection-delete-confirm').modal({
           relatedTarget: this,
           onConfirm: function () {
-            var currentCollectionId = document.getElementById("current-collection").innerText;
-            if (currentCollectionId == "默认收藏夹") {
-              alert('无法删除默认收藏夹');
-            } else {
               Delete();
-            }
           }
         });
       });
@@ -343,7 +338,9 @@
 
       //initial
       $('#edit-confirm').on('open.modal.amui', function () {
-        title = document.getElementById("edit-title").value;
+        title = document.getElementById("collection-name").innerText;
+        document.getElementById("edit-title").setAttribute("value",title);
+        //TODO: status更改
         status = $('#edit-status-selected').val();
       });
 
@@ -401,14 +398,14 @@
         });
     }
 
- //DONE 获取所有公开的收藏夹
- function List() {
+    //DONE 获取所有公开的收藏夹
+    function List() {
       var reqId = "1";
       var reqType = "List";
       var publicStatus = "-1";//-1 读取用户所有status的收藏夹
       var userID = document.URL.split("?")[1];
       var device = "pc";
-      var pageSize = 5; 
+      var pageSize = 5;
       var pageNum = 1;
 
       var objParam =
@@ -417,7 +414,7 @@
         "reqType": reqType,
         "reqParam":
         {
-          "publicStatus":publicStatus,
+          "publicStatus": publicStatus,
           "userId": userID,
           "device": device
         },
@@ -432,21 +429,21 @@
         ({
           url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/list",
           // get与post的data格式不同
-          data:{
-				    reqId: reqId,
-			    	reqType: reqType,
-				    reqParam: JSON.stringify(
-            {
-              "publicStatus":publicStatus,
-              "userId": userID,
-              "device": device
-            }),
-            reqPageInfo:JSON.stringify(
-            {
-              "pageSize": pageSize,
-              "pageNum": pageNum
-            })
-			      },  
+          data: {
+            reqId: reqId,
+            reqType: reqType,
+            reqParam: JSON.stringify(
+              {
+                "publicStatus": publicStatus,
+                "userId": userID,
+                "device": device
+              }),
+            reqPageInfo: JSON.stringify(
+              {
+                "pageSize": pageSize,
+                "pageNum": pageNum
+              })
+          },
           datatype: "json",
           type: "GET",
           async: false,
@@ -454,25 +451,35 @@
           success: function (objResult) {
             //显示所有公开收藏夹信息
             var collectionList = document.getElementById("mylist");
-            for(var i = 0;i<objResult.resResult.curData.totalElements;i++){
+            for (var i = 0; i < objResult.resResult.curData.totalElements; i++) {
               var collection = document.createElement("li");
               var link = document.createElement("a");
               var id = objResult.resResult.curData.content[i].collectionId;//收藏夹ID 
               var name = objResult.resResult.curData.content[i].name;//收藏夹名字
+              var publicStatus = objResult.resResult.curData.content[i].publicStatus;//收藏夹状态
+              var status;
+              switch (publicStatus) {
+                case 0: status = "自己可见";
+                case 1: status = "小组公开";
+                case 2: status = "完全公开";
+              }
+              var createTime = objResult.resResult.curData.content[i].createTime;//创建时间
               link.id = id;
               link.text = name;
-              // link.href="";
-              link.setAttribute("onclick","changeCollection(this)");
-              if(i == 0){
+              link.value = status;
+              link.setAttribute("onclick", "changeCollection(this)");
+              if (i == 0) {
                 collection.className = "am-active";//默认激活第一个收藏夹
                 var cur = document.getElementById("collection-name")
                 cur.innerText = name;
-                cur.setAttribute("value",id);
+                cur.setAttribute("value", id);
+                document.getElementById("collection-status").innerText = status;
+                document.getElementById("collection-creatTime").innerText = createTime;
               }
               collection.appendChild(link);
-              collectionList.appendChild(collection); 
+              collectionList.appendChild(collection);
             }
-             
+
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(XMLHttpRequest.status);
@@ -485,7 +492,7 @@
     ListCollection();
     $(EntryDeleteConfirm());
 
-    function changeCollection(obj){
+    function changeCollection(obj) {
       var collectionId = document.getElementById("collection-name").getAttribute("value");
       document.getElementById(collectionId).parentNode.className = "";
 
@@ -493,22 +500,24 @@
       //获取当前激活的收藏夹的文章
       var name = obj.text;
       var id = obj.id;
+      var status = obj.value;
       var cur = document.getElementById("collection-name")
       cur.innerText = name;
-      cur.setAttribute("value",id);
+      cur.setAttribute("value", id);
+      document.getElementById("collection-status").innerText = status;
       ListCollection();
       $(EntryDeleteConfirm());
     }
-              
 
-//DONE 获得收藏夹所有的文章
-function ListCollection() {
+
+    //DONE 获得收藏夹所有的文章
+    function ListCollection() {
       var reqId = "1";
       var reqType = "ListCollection";
       var userId = document.URL.split("?")[1];
-      var collectionId =  document.getElementById("collection-name").getAttribute("value");
+      var collectionId = document.getElementById("collection-name").getAttribute("value");
       var device = "pc";
-      var pageSize = 5; 
+      var pageSize = 5;
       var pageNum = 1;
 
       var objParam =
@@ -530,20 +539,20 @@ function ListCollection() {
       $.ajax
         ({
           url: "http://120.79.191.240:8089/rssbackend/api/v1/entry/list/collection",
-          data:{
-				    reqId: reqId,
-			    	reqType: reqType,
-				    reqParam: JSON.stringify(
-            {
-              "collectionId": collectionId,
-              "device": device
-            }),
+          data: {
+            reqId: reqId,
+            reqType: reqType,
+            reqParam: JSON.stringify(
+              {
+                "collectionId": collectionId,
+                "device": device
+              }),
             reqPageInfo: JSON.stringify(
-            {
-              "pageSize": pageSize,
-              "pageNum": pageNum
-            })
-			      },
+              {
+                "pageSize": pageSize,
+                "pageNum": pageNum
+              })
+          },
           datatype: "json",
           type: "GET",
           async: false,
@@ -616,8 +625,8 @@ function ListCollection() {
         });
     }
 
-//DONE: 更新收藏夹信息（name, publicStatus）
-function Update() {
+    //DONE: 更新收藏夹信息（name, description,publicStatus）
+    function Update() {
       var reqId = "1";
       var reqType = "Update";
       var name = document.getElementById("edit-title").value;
@@ -634,7 +643,7 @@ function Update() {
           "name": name,
           "description": description,
           "publicStatus": status,
-          "collectionId": collectionId 
+          "collectionId": collectionId
         }
       };
 
@@ -647,8 +656,16 @@ function Update() {
           contentType: "application/json",
           success: function (objResult) {
             //更改收藏夹内容
-            document.getElementById("collection-name") = objResult.resResult.curData.name;
-            document.getElementById("collection-status") = objResult.resResult.curData.publicStatus;
+            document.getElementById("collection-name").innerText = objResult.resResult.curData.name;
+            
+            var publicStatus = objResult.resResult.curData.publicStatus;//收藏夹状态
+            var status;
+            switch (publicStatus) {
+              case 0: status = "自己可见";
+              case 1: status = "小组公开";
+              case 2: status = "完全公开";
+            }
+            document.getElementById("collection-status").innerText = status;
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(XMLHttpRequest.status);
@@ -659,386 +676,7 @@ function Update() {
 
   </script>
 
-  <script>
-
-
-
-    //存储收藏夹信息
-    function Save() {
-      var reqId = "1";
-      var reqType = "Save";
-      var name = //【获取收藏夹name】
-		var description = //【收藏夹description】
-		var publicStatus = //【收藏夹publicStatus】
-		var userId = //【获取userId】
-		
-		var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "name": name,
-          "description": description
-        },
-        "reqUserInfo":
-        {
-          "userId": userId
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            alert("保存成功！");
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-    //为收藏夹添加文章
-    function AddEntry() {
-      var reqId = "1";
-      var reqType = "AddEntry";
-      var collectionId = //【收藏夹Id】;
-		var entryId = //【文章id】
-		
-		var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "collectionId": collectionId,
-          "entryId": entryId
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/addEnrty",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //将HTML中type收藏夹下内容清空
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-    //更改收藏夹公开状态
-    function ChangeStatus() {
-      var reqId = "1";
-      var reqType = "ChangeStatus";
-      var collectionId = //【收藏夹Id】;
-		var status = //【更改后status（0，1，2）】
-		
-		var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "collectionId": collectionId,
-          "publicStatus": status
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/changeStatus",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //修改HTML中该文件的状态为status
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-    //DONE: 更新收藏夹信息（name, publicStatus）
-    function Update() {
-      var reqId = "1";
-      var reqType = "Update";
-      var name = document.getElementById("edit-title").value;//【收藏夹名字】
-      var status = curStatus//【更改后status（0，1，2）】
-
-      var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "name": name,
-          "publicStatus": status
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/update",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //更改收藏夹内容
-            document.getElementById("collection-name") = objResult.resResult.curData.name;
-            document.getElementById("collection-status") = objResult.resResult.curData.publicStatus;
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-   
-
-    // 获取组内所有公开的收藏夹信息
-    function ListGroupPublic() {
-      var reqId = "1";
-      var reqType = "ListGroupPublic";
-      var device = "pc";
-      var groupId = //【组id】
-		  var pageSize = 10000; 	//一页有多少项，根据网页显示效果决定
-      var pageNum = 1			//页码，从1开始，本来设计为分页读取，但为方便直接一次性读完所有收藏夹
-
-      var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "groupId": groupId,
-          "device": device
-        },
-        "reqPageInfo":
-        {
-          "pageSize": pageSize,
-          "pageNum": pageNum
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/groupPublic",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //显示所有组公开收藏夹信息
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-    // 获取用户publicStatus的收藏夹
-    function List() {
-      var reqId = "1";
-      var reqType = "List";
-      var userId = //【获取userId】
-		var device = "pc";
-      var pageSize = 10000; 	//一页有多少项，根据网页显示效果决定
-      var pageNum = 1			//页码，从1开始，本来设计为分页读取，但为方便直接一次性读完所有收藏夹
-
-      var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "groupId": groupId,
-          "device": device
-        },
-        "reqPageInfo":
-        {
-          "pageSize": pageSize,
-          "pageNum": pageNum
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/list",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //显示用户公开收藏夹信息
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-    // 清空一个收藏夹
-    function Clear() {
-      var reqId = "1";
-      var reqType = "Clear";
-      var userId = //【获取userId】
-		var collectionId = //【获取收藏夹id】
-		
-		var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "collectionId": collectionId
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/clear",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //从HTML中删除此收藏夹的内容
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-    //TODO: 删除收藏夹
-    function Delete() {
-      var reqId = "1";
-      var reqType = "Delete";
-      var userId = //【获取userId】
-      var collectionId = //【获取收藏夹id】
-
-      var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "collectionId": collectionId
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/delete",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //从HTML中删除此收藏夹,获取默认收藏夹的文章进行显示
-            var objDefault =
-            {
-              "reqId": reqId,
-              "reqType": reqType,
-              "reqParam":
-              {
-                "collectionId": ""//默认收藏夹
-              }
-            };
-            //TODO: 实现ListCollection()接口
-            ListCollection(objDefault);
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-    
-
-    // 删除文章
-    function RemoveEntry() {
-      var reqId = "1";
-      var reqType = "RemoveEntry";
-      var entryId = //【要删除的文章id】
-		
-		var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "entryId": entryId
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/removeEntry",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //从HTML中删除文章项
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-    // 移动文章到另一个收藏夹
-    function MoveEntry() {
-      var reqId = "1";
-      var reqType = "MoveEntry";
-      var userId = //【获取userId】
-		var entryId = //【文章id】
-		var targetId = //【目标文件夹id】
-		
-		var objParam =
-      {
-        "reqId": reqId,
-        "reqType": reqType,
-        "reqParam":
-        {
-          "entryId": entryId,
-          "targetId": targetId,
-
-        }
-      };
-
-      $.ajax
-        ({
-          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/moveEntry",
-          data: JSON.stringify(objParam),
-          datatype: "json",
-          type: "POST",
-          contentType: "application/json",
-          success: function (objResult) {
-            //将文章移动到另一个收藏夹显示
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.status);
-          }
-        });
-    }
-
-  </script>
+  
 </body>
 
 </html>
