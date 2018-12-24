@@ -10,7 +10,6 @@
   <meta http-equiv="Cache-Control" content="no-siteapp" />
   <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
   <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
-  	<meta http-equiv="Access-Control-Allow-Origin" content="*">
   <style>
     .header {
       text-align: center;
@@ -23,6 +22,7 @@
     .header p {
       font-size: 14px;
     }
+		
   </style>
 </head>
 <body>
@@ -37,13 +37,13 @@
 	
 	    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
 	      <ul class="am-nav am-nav-pills am-topbar-nav">
-	        <li class="am-active"><a href="#">首页</a></li>
+	        <li><a href="#">首页</a></li>
 	        <li><a href="Collection.html">收藏</a></li>
 	        <li><a href="#">小组</a></li>
 	      </ul>
 	
 	      <div class="am-topbar-right">
-	        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+	        <a href="login.html"><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button></a>
 	      </div>
 	    </div>
 	  </header>
@@ -62,30 +62,78 @@
       <br>
       <label for="password">密码:</label>
       <input type="password" name="" id="password" value="">
-	  <h3>性别：</h3>
-	  <div class="am-radio">
-	  <label>
-	  <input type="radio" name="doc-radio-1" value="0" checked>女</label>
-	  </div>
-	  <div class="am-radio">
+	    <h3>性别：</h3>
+	    <div class="am-radio">
+	    <label>
+	    <input type="radio" name="sex" value="0" checked>女</label>
+	    </div>
+	    <div class="am-radio">
       <label>
-        <input type="radio" name="doc-radio-1" value="1">男</label>
+        <input type="radio" name="sex" value="1">男</label>
       </div>
-	  <label for="email">邮箱:</label>
-	  <input type="email" name="" id="email" value="" placeholder="***@**.com">
-	  <br>
+	    <label for="email">邮箱:</label>
+	    <input type="email" name="" id="email" value="" placeholder="***@**.com">
+			<br>
+			<label for="phone">电话:</label>
+			<input type="text" name="" id="phone" value="">
+	    <br>
       <div class="am-cf">
-        <input type="submit" name="" value="注 册" class="am-btn am-btn-primary am-round am-btn-block am-fl">
+        <input type="button" value="注 册" class="am-btn am-btn-primary am-round am-btn-block am-fl" onclick="Register()">
       </div>
     </form>
     <br>
 	<hr>
-    <p>© 2018 My rss.</p>
+    <p>Register | My RSS<br />
+    <small>© Copyright 2018</small>
+		</p>
   </div>
 </div>
-</body>
+<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
-
-
+	function Register()
+	{
+		// 根据程志强给的文档JSDoc::User构造objParam对象
+		var reqId = "1";
+		var reqType = "Register";
+		var name = document.getElementById("username").value;		
+		var password = document.getElementById("password").value;
+		var sex =  $("input[name='sex']:checked").val();
+		var email = document.getElementById("email").value;
+		var phone = document.getElementById("phone").value;
+		
+		var objParam = 
+		{
+			"reqId": reqId,
+			"reqType": reqType,
+			"reqParam":
+			{
+				"username": name,
+				"password": password,
+				"phone":phone,
+				"email":email,
+				"sex":sex,
+			}
+		};
+				
+		// 调用ajax与服务器连接（该语法需要jQuery，所以必须有）
+		$.ajax
+		({     
+            url: "http://120.79.191.240:8089/rssbackend/api/v1/user/register",	//这个URL地址也需要根据文档来确定
+            data: JSON.stringify(objParam),     							//传递objParam时要转换成string
+            datatype: "json",  
+            type: "POST",  				//根据文档确定用GET还是POST  	
+			async: false,
+            contentType: "application/json", 
+            success:function(objResult)
+			{			
+				window.location.href="Personal_information.html?"+objResult.resResult.curData.userId;
+            },
+			error: function(XMLHttpRequest, textStatus, errorThrown)
+			{     			
+				alert(XMLHttpRequest.status);
+            }     			
+        });   			
+	}
 </script>
+</body>
 </html>

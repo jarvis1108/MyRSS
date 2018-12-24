@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <title>Personal_information | My RSS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+  <meta name="description" content="这是一个form页面">
+  <meta name="keywords" content="form">
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <style>
+    @media only screen and (min-width: 1200px) {
+      .blog-g-fixed {
+        max-width: 1200px;
+      }
+    }
+    @media only screen and (min-width: 641px) {
+      .blog-sidebar {
+        font-size: 1.4rem;
+      }
+    }
+    .blog-main {
+      padding: 20px 0;
+    }
+    .blog-title {
+      margin: 10px 0 20px 0;
+    }
+    .blog-meta {
+      font-size: 14px;
+      margin: 10px 0 20px 0;
+      color: #222;
+    }
+    .blog-meta a {
+      color: #27ae60;
+    }
+    .blog-pagination a {
+      font-size: 1.4rem;
+    }
+    .blog-content img {
+      max-width: 100%;
+      height: auto;
+    }
+    .blog-footer {
+      padding: 10px 0;
+      text-align: center;
+    }
+    .collection-list a{
+      color:#434343;
+    }
+     {
+      float:right;
+    }
+    .content-icon {
+      float: right;
+      margin: 0 10px;
+    }
+	#inf{
+		padding: 10px 10% 10px 20px;
+	}
+  </style>
+</head>
+
+<body>
+
+  <!-- header -->
+  <header class="am-topbar">
+    <h1 class="am-topbar-brand">
+      <a href="#">My RSS</a>
+    </h1>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
+        class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+      <ul class="am-nav am-nav-pills am-topbar-nav">
+        <li><a href="#">首页</a></li>
+        <li><a href="Collection.html">收藏</a></li>
+        <li><a href="#">小组</a></li>
+		
+      </ul>
+
+      
+  </header>
+
+  <div class="am-g am-g-fixed blog-g-fixed">
+    <!-- catalogue -->
+    <div class="am-u-md-4 blog-sidebar">
+      <div class="am-panel-group">
+        <div class="am-panel am-panel-default">
+        	<div class="am-panel-bd">
+        		<div class="am-g">
+        			<div class="am-u-md-4">
+        				<img class="am-img-circle am-img-thumbnail" src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80" alt=""/>
+        			</div>
+        			<!-- <div class="am-u-md-8">
+        				<p>你可以使用本地上传头像。 </p>
+        				<form class="am-form">
+        					<div class="am-form-group">
+        						<input type="file" id="user-pic">
+        						<p class="am-form-help">请选择要上传的文件...</p>
+        						<button type="button" class="am-btn am-btn-primary am-btn-xs">保存</button>
+        					</div>
+        				</form>
+        			</div> -->
+					<div>
+						<h3 id="DuserName">ajax</h3>
+					</div>
+        		</div>
+        	</div>
+        </div>
+
+        
+		<div class="am-panel am-panel-default admin-sidebar-panel">
+			<div class="am-panel-bd">
+				<p><span class="am-icon-bookmark"></span> 公告</p>
+				<p>时光静好，与君语；细水流年，与君同。—— My RSS</p>
+			</div>
+		</div>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div class="am-u-md-8">
+		<div class="am-tabs am-margin" data-am-tabs>
+		      <ul class="am-tabs-nav am-nav am-nav-tabs">
+		        <li class="am-active" id="select1"><a onclick="show(1)">基本信息</a></li>
+		        <li id="select2"><a onclick="show(2)">修改信息</a></li>
+		      </ul>
+		
+		      <div class="am-tabs-bd" id="inf">
+		        <div class="am-tab-panel am-fade am-in am-active" id="information1">
+		       
+		
+		          <div class="am-g am-margin-top" style="padding-left: 20px;">
+					<h3 id="Dsex">ajax</h3>
+					<h3 id="Demail">ajax</h3>
+					<h3 id="Dphone">ajax</h3>
+		          </div>
+		
+		        </div>
+		
+		        <div class="am-tab-panel am-fade" id="information2">
+					
+		          <form method="post" class="am-form">
+		          	<h3>性别：</h3>
+		          	<div class="am-radio">
+		          	<label>
+		          	<input type="radio" name="sex" value="0" checked>女</label>
+		          	</div>
+		          	<div class="am-radio">
+		          	<label>
+		          	<input type="radio" name="sex" value="1">男</label>
+		          	</div>
+		          	<label for="email">邮箱:</label>
+		          	<input type="email" name="" id="email" value="" placeholder="***@**.com">
+		          	<br>
+		          	<label for="phone">电话:</label>
+		          	<input type="text" name="" id="phone" value="">
+		          	<br>
+		          	<div class="am-cf">
+		          		<input type="submit" name="" value="提交 保存" class="am-btn am-btn-primary am-round am-fl" onclick="Update()">
+		          	</div>
+		          </form>
+		        </div>
+		
+		       
+		
+		      </div>
+		</div>
+		
+    </div>
+	
+	
+   </div>
+	  
+	  
+
+
+
+ <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+ 
+ <footer class="blog-footer">
+	 <hr>
+     <p>Personal_information | My RSS<br />
+ 	 <small>© Copyright 2018</small>
+     </p>
+ </footer>
+
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script type="text/javascript" src="assets/js/information-exchange.js"></script>
+<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+    function show(num)
+    {
+        for(var i=1; i<=2; i++)
+        {
+            document.getElementById("information"+i).style.display="none";
+        }
+			document.getElementById("information"+num).style.display="block";
+    }
+	
+	function Update()
+	{
+		// 根据程志强给的文档JSDoc::User构造objParam对象
+		var reqId = "1";
+		var reqType = "Update";		
+		var userId = document.URL.split("?")[1];
+		
+		
+
+		var sex = $("input[name='sex']:checked").val();
+		var email = document.getElementById("email").value;
+		var phone = document.getElementById("phone").value;
+		
+		var objParam = 
+		{
+			"reqId": reqId,
+			"reqType": reqType,
+			"reqParam":
+			{
+				"username": null,
+				"password": null,
+				"phone":phone,
+				"email":email,
+				"sex":sex,
+			},
+			"reqUserInfo":
+			{
+				"userId":userId
+			}
+		};
+				
+		// 调用ajax与服务器连接（该语法需要jQuery，所以必须有）
+		$.ajax
+		({     
+			url: "http://120.79.191.240:8089/rssbackend/api/v1/user/update",	//这个URL地址也需要根据文档来确定
+			data: JSON.stringify(objParam),     							//传递objParam时要转换成string
+			datatype: "json",  
+			type: "POST",  													//根据文档确定用GET还是POST
+			async: false,						
+			contentType: "application/json", 
+			success:function(objResult) 
+			{						
+				window.location.href="Personal_information.html?"+objResult.resResult.curData.userId;				
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown)	
+			{   
+				alert("aaaa");				
+			}     			
+			});   			
+	}
+	
+    function Detail()
+	{
+		var reqId = "999";
+		var reqType = "Detail";
+		var userId = document.URL.split("?")[1];
+		
+		var objParam = 
+		{
+			"reqId": reqId,
+			"reqType": reqType,
+			"reqUserInfo":
+			{
+				"userId": userId
+			}
+		};
+				
+		$.ajax
+		({     
+			url: "http://120.79.191.240:8089/rssbackend/api/v1/user/detail",
+			data: 
+			{
+				reqId: reqId,
+				reqType: reqType,
+				reqUserInfo: JSON.stringify({
+                        "userId": userId
+                })
+			},     							
+			datatype: "json",
+			async: false,
+            timeout: 10000,  
+            cache: true,  
+			type: "GET",  														
+			contentType: "application/json", 
+			success:function(objResult) 
+			{				
+				document.getElementById("DuserName").innerHTML ="用户名："+ objResult.resResult.curData.username;
+				document.getElementById("Dsex").innerHTML ="性别：" +objResult.resResult.curData.sex;
+				document.getElementById("Demail").innerHTML ="邮箱：" +objResult.resResult.curData.email;
+				document.getElementById("Dphone").innerHTML ="电话：" +objResult.resResult.curData.phone;
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown)	
+			{     
+				alert("错误代码："+ textStatus);
+			}     			
+		});   			
+	}
+	
+	
+	
+	Detail();
+</script>
+ 
+</body>
+</html>

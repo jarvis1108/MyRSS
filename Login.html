@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-  <meta http-equiv="Access-Control-Allow-Origin" content="*">
   <meta charset="UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
   <title>Login | My RSS</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,12 +38,12 @@
 	    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
 	      <ul class="am-nav am-nav-pills am-topbar-nav">
 	        <li><a href="#">首页</a></li>
-	        <li class="am-active"><a href="Collection.html">收藏</a></li>
+	        <li><a href="#">收藏</a></li>
 	        <li><a href="#">小组</a></li>
 	      </ul>
 	
 	      <div class="am-topbar-right">
-	        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+	        <a href="register.html"><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">注册</button></a>
 	      </div>
 	    </div>
 	  </header>
@@ -64,12 +64,15 @@
       <input type="password" name="" id="password" value="123456">
       <br>
       <div class="am-cf">
-        <input type="submit" id="submit" name="" value="登陆" class="am-btn am-btn-primary am-round am-btn-block am-fl" onclick="Login()">
+        <input type="button" name="" value="登陆" class="am-btn am-btn-primary am-round am-btn-block am-fl" onclick="Login()">
       </div>
     </form>
     <br>
 	<hr>
-    <p>© 2018 My rss.</p>
+    
+		<p>Personal_information | My RSS<br />
+		<small>© Copyright 2018</small>
+		</p>
   </div>
 </div>
 <script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -92,32 +95,25 @@
 				"password": password
 			}
 		};
-				
-		// 调用ajax与服务器连接（该语法需要jQuery，所以必须有“<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>”）
+					
+		// 调用ajax与服务器连接（该语法需要jQuery，所以必须有）
 		$.ajax
 		({     
-            url: "http://120.79.191.240:8089/rssbackend/api/v1/user/login",	//这个URL地址也需要根据文档来确定
-            data: JSON.stringify(objParam),     							//传递objParam时要转换成string
+            url: "http://120.79.191.240:8089/rssbackend/api/v1/user/login",
+            data: JSON.stringify(objParam),     							
             datatype: "json",  
-            type: "POST",  													//根据文档确定用GET还是POST  	
+            type: "POST",													
+			async: false,
             contentType: "application/json", 
-            success:function(objResult) 					
+            success:function(objResult) 
 			{
-				//在这里得到objResult，它也是json对象，其定义参考文档				
-
-				//根据业务逻辑这里需要跳转到Collection.html，则如下操作(并传递userId）				
-				window.location.href="Collection.html"+"?userId="+objResult.resResult.curData.userId;
-				
-				//如果业务逻辑需要更新HTML，例如要在<div id="aaa"></div>中插入bbb：
-				//document.getElementById('aaa').innerHTML = bbb
+				window.location.href="Personal_information.html?"+objResult.resResult.curData.userId;
             },
 			error: function(XMLHttpRequest, textStatus, errorThrown)
 			{     
-				//如果连接出错会执行这里，输出status来得到错误代码，然后分析原因
-				//（有时这个alert弹窗会一闪而过，所以需要在调试模式下才能看到弹窗）
 				alert(XMLHttpRequest.status);
             }     			
-        });   			
+        });		
 	}
 </script>
 </body>
