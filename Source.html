@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Collection | My RSS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+  <style>
+    @media only screen and (min-width: 1200px) {
+      .blog-g-fixed {
+        max-width: 1200px;
+      }
+    }
+    @media only screen and (min-width: 641px) {
+      .blog-sidebar {
+        font-size: 1.4rem;
+      }
+    }
+    .blog-main {
+      padding: 20px 0;
+    }
+    .blog-title {
+      margin: 10px 0 20px 0;
+    }
+    .blog-meta {
+      font-size: 14px;
+      margin: 10px 0 20px 0;
+      color: #222;
+    }
+    .blog-meta a {
+      color: #27ae60;
+    }
+    .blog-pagination a {
+      font-size: 1.4rem;
+    }
+    .blog-content img {
+      max-width: 100%;
+      height: auto;
+    }
+    .blog-footer {
+      padding: 10px 0;
+      text-align: center;
+    }
+    .collection-list a{
+      color:#434343;
+    }
+    .collection-list-add {
+      float:right;
+    }
+    .content-icon {
+      float: right;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- header -->
+    <header class="am-topbar">
+      <h1 class="am-topbar-brand">
+        <a href="#">My RSS</a>
+      </h1>
+  
+      <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
+          class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+  
+      <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+        <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
+          <li><a href="#">首页</a></li>
+          <li><a href="Collection.html">收藏</a></li>
+          <li><a href="#">小组</a></li>
+  				<li class="am-active"><a href="Source.html">来源</a></li>
+  				<li><a href="Personal_information.html" >个人信息</a></li>
+        </ul>
+  		</div>	
+    </header>
+
+  <div class="am-g am-g-fixed blog-g-fixed">
+    <!-- catalogue -->
+    <div class="am-u-md-4 blog-sidebar">
+      <div class="am-panel-group">
+        <section class="am-panel am-panel-default">
+          <div class="am-panel-hd">关于收藏</div>
+          <div class="am-panel-bd">
+            <p>我们在首页上为你推荐了最新的RSS文章，你可以收藏到这里，以备以后查看。</p>
+            <p>你也可以在这里导入自己的RSS。</p>
+            <button type="button" class="am-btn am-btn-success am-btn-sm" id="collection-prompt-toggle">导入RSS</button>
+          </div>
+
+          <div class="am-modal am-modal-prompt" tabindex="-1" id="collection-prompt">
+            <div class="am-modal-dialog">
+              <div class="am-modal-hd">导入RSS</div>
+              <div class="am-modal-bd">
+                请将需要导入的文章链接粘贴到下方文本框内
+                <input type="text" class="am-modal-prompt-input">
+              </div>
+              <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-confirm>导入</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="am-panel am-panel-default">
+          <div class="am-panel-hd">RSS列表
+            <a href="" class="collection-list-add">添加</a>
+          </div>
+          <ul class="am-nav collection-list">
+            <li class="am-active"><a href="#">IT之家</a></li>
+            <li><a href="#">知乎每日精选</a></li>
+            <li><a href="#">少数派</a></li>
+            <li><a href="#">什么值得买</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div class="am-u-md-8">
+
+      <section class="am-panel am-panel-primary">
+        <header class="am-panel-hd">
+          <h3 class="am-panel-title">IT之家
+            <a class="am-icon-remove content-icon" id="collection-remove-toggle"></a>
+            <a class="am-icon-edit content-icon"></a>
+          </h3>
+        </header>
+				<div class="am-panel-bd">
+					www.IThome.com/rss/
+				</div>
+        <div class="am-panel-bd">
+          创建于 2018/09/10 · 公开
+        </div>
+
+        <div class="am-modal am-modal-confirm" tabindex="-1" id="remove-confirm">
+          <div class="am-modal-dialog">
+            <div class="am-modal-hd">删除RSS</div>
+            <div class="am-modal-bd">
+              你确定要删除这个RSS吗？
+            </div>
+            <div class="am-modal-footer">
+              <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+              <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+      
+
+      <article class="blog-main">
+        <h3 class="am-article-title">
+          <a href="#">番茄花园Ghost Win7 x32位家庭纯净版v2018.12</a>
+        </h3>
+        <h4 class="am-article-meta blog-meta">by <a href="">ben</a> · 2018/08/20 · <a href="#">简书</a>
+        </h4>
+        <div class="am-g blog-content">
+          <div class="am-u-lg-12">
+            <p>by ITeye论坛最新讨论 · 12/19/18 9:42 PM · ITeye论坛最新讨论</p>
+          </div>
+        </div>
+      </article>
+
+      <hr class="am-article-divider blog-hr">
+
+      <article class="blog-main">
+        <h3 class="am-article-title blog-title">
+          <a href="#">Confluence 6 如何让我的小组成员知道那些内容是重要的</a>
+        </h3>
+        <h4 class="am-article-meta blog-meta">by <a href="">User</a> · 2018/06/17 · <a href="#">CSDN</a></h4>
+        <div class="am-g blog-content">
+          <div class="am-u-lg-12">
+            <p>by 综合技术论坛最新讨论 - ITeye · 12/19/18 9:42 PM · 综合技术论坛最新讨论 - ITeye</p>
+          </div>
+        </div>
+      </article>
+
+      <hr class="am-article-divider blog-hr">
+
+      <ul class="am-pagination blog-pagination">
+        <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
+        <li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer class="blog-footer">
+    <p>Source | My RSS<br />
+      <small>© Copyright 2018</small>
+    </p>
+  </footer>
+
+  <!--[if lt IE 9]>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+  <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+  <![endif]-->
+
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="assets/js/jquery.min.js"></script>
+  <!--<![endif]-->
+  <script src="assets/js/amazeui.min.js"></script>
+<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script>
+	licolection = document.getElementById("nav").childNodes;
+	for (i = 0; i < parseInt(licolection.length / 2); ++i) {
+		element = licolection[i*2 + 1].childNodes[0];
+		element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
+	}
+</script>
+
+  <script>
+    $(function () {
+      $('#collection-prompt-toggle').on('click', function () {
+        $('#collection-prompt').modal({
+          relatedTarget: this,
+          onConfirm: function (e) {
+            alert('你输入的是：' + e.data || '')
+          }
+        });
+      });
+      $('#collection-remove-toggle').on('click', function () {
+        $('#remove-confirm').modal({
+          relatedTarget: this,
+          onConfirm: function () {
+            alert("已成功删除！");
+          },
+          onCancel: function () {
+          }
+        }); 
+      });
+    });
+    
+	
+  </script>
+
+
+</body>
+</html>
