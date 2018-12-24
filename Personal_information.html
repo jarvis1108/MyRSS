@@ -81,14 +81,13 @@
         class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
 
     <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
-      <ul class="am-nav am-nav-pills am-topbar-nav">
+      <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
         <li><a href="#">首页</a></li>
         <li><a href="Collection.html">收藏</a></li>
-        <li><a href="#">小组</a></li>
-		
+        <li><a href="Group.html">小组</a></li>
+				<li class="am-active"><a href="Personal_information.html" >个人信息</a></li>
       </ul>
-
-      
+		</div>	
   </header>
 
   <div class="am-g am-g-fixed blog-g-fixed">
@@ -150,7 +149,7 @@
 		
 		        <div class="am-tab-panel am-fade" id="information2">
 					
-		          <form method="post" class="am-form">
+		          <form class="am-form">
 		          	<h3>性别：</h3>
 		          	<div class="am-radio">
 		          	<label>
@@ -167,7 +166,7 @@
 		          	<input type="text" name="" id="phone" value="">
 		          	<br>
 		          	<div class="am-cf">
-		          		<input type="submit" name="" value="提交 保存" class="am-btn am-btn-primary am-round am-fl" onclick="Update()">
+		          		<input type="button" value="提交 保存" class="am-btn am-btn-primary am-round am-fl" onclick="Update()">
 		          	</div>
 		          </form>
 		        </div>
@@ -201,6 +200,15 @@
 <script src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/information-exchange.js"></script>
 <script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script>
+	licolection = document.getElementById("nav").childNodes;
+	for (i = 0; i < parseInt(licolection.length / 2); ++i) {
+		element = licolection[i*2 + 1].childNodes[0];
+		element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
+	}
+</script>
+
 <script>
     function show(num)
     {
@@ -213,13 +221,11 @@
 	
 	function Update()
 	{
-		// 根据程志强给的文档JSDoc::User构造objParam对象
 		var reqId = "1";
 		var reqType = "Update";		
 		var userId = document.URL.split("?")[1];
 		
 		
-
 		var sex = $("input[name='sex']:checked").val();
 		var email = document.getElementById("email").value;
 		var phone = document.getElementById("phone").value;
@@ -241,20 +247,19 @@
 				"userId":userId
 			}
 		};
-				
-		// 调用ajax与服务器连接（该语法需要jQuery，所以必须有）
+		
 		$.ajax
 		({     
-			url: "http://120.79.191.240:8089/rssbackend/api/v1/user/update",	//这个URL地址也需要根据文档来确定
-			data: JSON.stringify(objParam),     							//传递objParam时要转换成string
+			url: "http://120.79.191.240:8089/rssbackend/api/v1/user/update",
+			data: JSON.stringify(objParam),     							
 			datatype: "json",  
-			type: "POST",  													//根据文档确定用GET还是POST
+			type: "POST",  													
 			async: false,						
 			contentType: "application/json", 
 			success:function(objResult) 
-			{						
-				window.location.href="Personal_information.html?"+objResult.resResult.curData.userId;				
-			},
+			{
+				window.location.href="Personal_information.html?"+objResult.resResult.curData.userId;
+            },
 			error: function(XMLHttpRequest, textStatus, errorThrown)	
 			{   
 				alert("aaaa");				
@@ -286,21 +291,25 @@
 				reqId: reqId,
 				reqType: reqType,
 				reqUserInfo: JSON.stringify({
-                        "userId": userId
+                    "userId": userId
                 })
 			},     							
 			datatype: "json",
 			async: false,
-            timeout: 10000,  
-            cache: true,  
+			timeout: 10000,  
+			cache: true,  
 			type: "GET",  														
 			contentType: "application/json", 
 			success:function(objResult) 
 			{				
 				document.getElementById("DuserName").innerHTML ="用户名："+ objResult.resResult.curData.username;
-				document.getElementById("Dsex").innerHTML ="性别：" +objResult.resResult.curData.sex;
+				if (objResult.resResult.curData.sex)
+					document.getElementById("Dsex").innerHTML ="性别：男";
+				else
+					document.getElementById("Dsex").innerHTML ="性别：女";
 				document.getElementById("Demail").innerHTML ="邮箱：" +objResult.resResult.curData.email;
 				document.getElementById("Dphone").innerHTML ="电话：" +objResult.resResult.curData.phone;
+				
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown)	
 			{     
