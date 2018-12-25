@@ -24,10 +24,12 @@
 
     <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
       <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
-        <li><a href="#">首页</a></li>
-        <li><a href="Collection.html">收藏</a></li>
-        <li><a href="group.html">小组</a></li>
-				<li><a href="Personal_information.html">个人信息</a></li>
+        <li><a href="Home_Page.html">发现</a></li>
+	        <li><a href="Share.html">分享</a></li>
+	        <li><a href="Collection.html">收藏</a></li>
+	        <li class="am-active"><a href="../Group.html">小组</a></li>
+			<li><a href="Source.html">来源</a></li>			
+			<li><a href="Personal_information.html" >个人信息</a></li>
       </ul>
   </header>
 
@@ -92,6 +94,16 @@
 	        </div>
 	      </div>
 	    </article>	       
-</div>  
+</div> 
+<script src = "https://code.jquery.com/jquery-3.3.1.js "></script>
+	<script src = "../assets/js/group.js"></script>
+	
+	<script>
+		licolection = document.getElementById("nav").childNodes;
+		for (i = 0; i < licolection.length / 2; ++i) {
+			element = licolection[i*2 + 1].childNodes[0];
+			element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
+		}
+	</script> 
 </body>
 </html>
