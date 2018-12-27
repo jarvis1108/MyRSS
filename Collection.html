@@ -154,15 +154,16 @@
               <div class="am-modal-hd">创建收藏夹</div>
               <div class="am-modal-bd">
                 <label class="edit-label">名字</label>
-                <input type="text" class="am-modal-prompt-input" value="">
+                <input type="text" class="am-modal-prompt-input" id="new-title" value="">
               </div>
               <div class="am-modal-bd">
                 <label class="edit-label">权限</label>
                 <div class="edit-status">
-                  <select id="edit-status-selected" data-am-selected>
+                  <select id="new-selected" data-am-selected>
+                    <option value=""></option>
                     <option value="0">自己可见</option>
                     <option value="1">小组公开</option>
-                    <option value="2" selected>完全公开</option>
+                    <option value="2">完全公开</option>
                   </select>
                 </div>
               </div>
@@ -216,10 +217,11 @@
             <div class="am-modal-bd">
               <label class="edit-label">权限</label>
               <div class="edit-status">
-                <select id="edit-selected" data-am-selected>
+                <select id="edit-selected" placeholder="修改权限" data-am-selected>
+                  <option selected value=""></option>
                   <option value="0">自己可见</option>
                   <option value="1">小组公开</option>
-                  <option value="2" selected>完全公开</option>
+                  <option value="2">完全公开</option>
                 </select>
               </div>
             </div>
@@ -318,7 +320,7 @@
         $('#collection-delete-confirm').modal({
           relatedTarget: this,
           onConfirm: function () {
-              Delete();
+            CollectionDelete();
           }
         });
       });
@@ -339,9 +341,9 @@
       //initial
       $('#edit-confirm').on('open.modal.amui', function () {
         title = document.getElementById("collection-name").innerText;
-        document.getElementById("edit-title").setAttribute("value",title);
-        //TODO: status更改
-        status = $('#edit-status-selected').val();
+        document.getElementById("edit-title").setAttribute("value", title);
+        var collectionId = document.getElementById("collection-name").getAttribute("value");
+        status = document.getElementById(collectionId).getAttribute("value");
       });
 
       $('#collection-edit-toggle').on('click', function () {
@@ -350,7 +352,7 @@
           onConfirm: function () {
             //校验是否发生更改
             var curTitle = document.getElementById("edit-title").value;
-            if (curTitle != title || curStatus) {
+            if (curTitle != title || curStatus != status) {
               console.log("change");
               Update();
             }
@@ -359,14 +361,27 @@
       });
     }
 
-    //TODO: collection-new-confirm
+    var newStatus = 3;//编辑后的收藏夹权限
+    function CollectionEditCheck() {
+      $('#new-selected').on('change', function () {
+        newStatus = $(this).val();
+      });
+    }
+
+
+    //DONE: collection-new-confirm
     function CollectionNewConfirm() {
       $('#collection-new-toggle').on('click', function () {
         $('#new-confirm').modal({
           relatedTarget: this,
           onConfirm: function () {
-
-
+            var title = document.getElementById("new-title").value;
+            var status = newStatus;
+            if ("" != title || 3 != status) {
+              Save();
+            } else {
+              alert("请输入收藏夹名称并选择公开权限");
+            }
           }
         });
       });
@@ -456,25 +471,26 @@
               var link = document.createElement("a");
               var id = objResult.resResult.curData.content[i].collectionId;//收藏夹ID 
               var name = objResult.resResult.curData.content[i].name;//收藏夹名字
-              var publicStatus = objResult.resResult.curData.content[i].publicStatus;//收藏夹状态
-              var status;
-              switch (publicStatus) {
-                case 0: status = "自己可见";
-                case 1: status = "小组公开";
-                case 2: status = "完全公开";
-              }
+              var publicStatus = objResult.resResult.curData.content[i].publicStatus;//收藏夹状态           
               var createTime = objResult.resResult.curData.content[i].createTime;//创建时间
               link.id = id;
               link.text = name;
-              link.value = status;
+              link.setAttribute("value", publicStatus);
               link.setAttribute("onclick", "changeCollection(this)");
               if (i == 0) {
                 collection.className = "am-active";//默认激活第一个收藏夹
                 var cur = document.getElementById("collection-name")
                 cur.innerText = name;
                 cur.setAttribute("value", id);
+                var status;
+                switch (publicStatus) {
+                  case 0: status = "自己可见"; break;
+                  case 1: status = "小组公开"; break;
+                  case 2: status = "完全公开"; break;
+                }
                 document.getElementById("collection-status").innerText = status;
                 document.getElementById("collection-creatTime").innerText = createTime;
+                curStatus = publicStatus;
               }
               collection.appendChild(link);
               collectionList.appendChild(collection);
@@ -500,10 +516,16 @@
       //获取当前激活的收藏夹的文章
       var name = obj.text;
       var id = obj.id;
-      var status = obj.value;
+      var publicStatus = obj.getAttribute("value");
       var cur = document.getElementById("collection-name")
       cur.innerText = name;
       cur.setAttribute("value", id);
+      var status;
+      switch (publicStatus) {
+        case "0": status = "自己可见"; break;
+        case "1": status = "小组公开"; break;
+        case "2": status = "完全公开"; break;
+      }
       document.getElementById("collection-status").innerText = status;
       ListCollection();
       $(EntryDeleteConfirm());
@@ -631,7 +653,7 @@
       var reqType = "Update";
       var name = document.getElementById("edit-title").value;
       var description = "";
-      var status = curStatus;
+      var pStatus = curStatus;
       var collectionId = document.getElementById("collection-name").getAttribute("value");
 
       var objParam =
@@ -642,7 +664,7 @@
         {
           "name": name,
           "description": description,
-          "publicStatus": status,
+          "publicStatus": curStatus,
           "collectionId": collectionId
         }
       };
@@ -655,17 +677,21 @@
           type: "POST",
           contentType: "application/json",
           success: function (objResult) {
-            //更改收藏夹内容
+            //更新收藏夹内容
             document.getElementById("collection-name").innerText = objResult.resResult.curData.name;
-            
+            //更新收藏夹列表
+            document.getElementById(collectionId).innerText = objResult.resResult.curData.name;
             var publicStatus = objResult.resResult.curData.publicStatus;//收藏夹状态
+            document.getElementById(collectionId).setAttribute("value", publicStatus);
             var status;
-            switch (publicStatus) {
-              case 0: status = "自己可见";
-              case 1: status = "小组公开";
-              case 2: status = "完全公开";
+            switch (pStatus) {
+              case 0: status = "自己可见"; break;
+              case 1: status = "小组公开"; break;
+              case 2: status = "完全公开"; break;
             }
             document.getElementById("collection-status").innerText = status;
+            window.location.href = "Collection.html?" + document.URL.split("?")[1];
+
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(XMLHttpRequest.status);
@@ -673,10 +699,82 @@
         });
     }
 
+    //新建收藏夹
+    function Save() {
+      var reqId = "1";
+      var reqType = "Save";
+      var name =  document.getElementById("new-title").value;
+		  var description = "";
+		  var publicStatus = newStatus;
+		  var userId = document.URL.split("?")[1];
+		
+		  var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
+        {
+          "name": name,
+          "description": description,
+          "publicStatus": publicStatus
+        },
+        "reqUserInfo":
+        {
+          "userId": userId
+        }
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection",
+          data: JSON.stringify(objParam),
+          datatype: "json",
+          type: "POST",
+          contentType: "application/json",
+          success: function (objResult) {
+            window.location.href = "Collection.html?" + document.URL.split("?")[1];
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
+
+    //删除收藏夹
+    function CollectionDelete() {
+      var reqId = "1";
+      var reqType = "Delete";
+      var collectionId = document.getElementById("collection-name").getAttribute("value");
+
+      var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
+        {
+          "collectionId": collectionId
+        }
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/delete",
+          data: JSON.stringify(objParam),
+          datatype: "json",
+          type: "POST",
+          contentType: "application/json",
+          success: function (objResult) {
+            window.location.href = "Collection.html?" + document.URL.split("?")[1];
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
 
   </script>
 
-  
+
 </body>
 
 </html>
