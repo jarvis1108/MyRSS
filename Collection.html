@@ -65,9 +65,21 @@
       font-size: 1.4rem;
     }
 
+    .blog-content {
+      max-height: 100px;
+      max-width: 800px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .blog-content img {
       max-width: 100%;
       height: auto;
+    }
+
+    .blog-option{
+      margin-top: 50px;
     }
 
     .blog-footer {
@@ -453,7 +465,7 @@
       var publicStatus = "-1";//-1 读取用户所有status的收藏夹
       var userID = document.URL.split("?")[1];
       var device = "pc";
-      var pageSize = 5;
+      var pageSize = 10;
       var pageNum = 1;
 
       var objParam =
@@ -499,7 +511,7 @@
           success: function (objResult) {
             //显示所有公开收藏夹信息
             var collectionList = document.getElementById("mylist");
-            for (var i = 0; i < objResult.resResult.curData.totalElements; i++) {
+            for (var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
               var collection = document.createElement("li");
               var link = document.createElement("a");
               var id = objResult.resResult.curData.content[i].collectionId;//收藏夹ID 
@@ -536,7 +548,7 @@
         });
     }
 
-    
+
 
     function changeCollection(obj) {
       var collectionId = document.getElementById("collection-name").getAttribute("value");
@@ -569,7 +581,7 @@
       var userId = document.URL.split("?")[1];
       var collectionId = document.getElementById("collection-name").getAttribute("value");
       var device = "pc";
-      var pageSize = 2;
+      var pageSize = 3;
 
 
       var objParam =
@@ -612,7 +624,7 @@
           success: function (objResult) {
             var articles = document.getElementById("articles");
             articles.innerHTML = "";//清空页面上的现有文章信息
-            for (var i = 0; i < objResult.resResult.curData.totalElements; i++) {
+            for (var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
               var article = document.createElement("article");
               article.className = "blog-main";
 
@@ -630,26 +642,27 @@
               meta.className = "am-article-meta blog-meta";
               var by = document.createTextNode("by ");
               var author = document.createElement("a");
-              author.text = objResult.resResult.curData.content[i].sourceName;//TODO:作者?
+              author.text = objResult.resResult.curData.content[i].sourceName;//来源
               var updateTime = objResult.resResult.curData.content[i].updateTime;//时间
               var time = document.createTextNode(updateTime);
-              var source = document.createElement("a");
-              source.text = objResult.resResult.curData.content[i].sourceName;//RSS来源
-              var split1 = document.createTextNode(" · ");
-              var split2 = document.createTextNode(" · ");
+              var split = document.createTextNode(" · ");
               meta.appendChild(by);
               meta.appendChild(author);
-              meta.appendChild(split1);
+              meta.appendChild(split);
               meta.appendChild(time);
-              meta.appendChild(split2);
-              meta.appendChild(source);
+
               article.appendChild(meta);
 
               //内容
               var content = document.createElement("div");
               content.className = "am-g blog-content am-u-lg-12";
               var p = document.createElement("p");
-              p.text = objResult.resResult.curData.content[i].content;//文章内容
+              p.className = "blog-content";
+              var description = objResult.resResult.curData.content[i].description;//文章内容
+              //TODO: 过滤文本换行符
+              var dd=description.replace(/<\/?.+?>/g,"");
+              var dds=dd.replace(/ /g,"");//dds为得到后的内容
+              p.innerText = dds;
               content.appendChild(p);
               article.appendChild(content);
 
@@ -809,7 +822,7 @@
       var link = document.getElementById("new-entry-link").value;
       var collectionId = document.getElementById("collection-name").getAttribute("value");
       var description = "";
-      var title = document.getElementById("new-entry-title").value; 
+      var title = document.getElementById("new-entry-title").value;
 
       var objParam =
       {
