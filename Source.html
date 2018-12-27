@@ -17,90 +17,132 @@
         max-width: 1200px;
       }
     }
+
     @media only screen and (min-width: 641px) {
       .blog-sidebar {
         font-size: 1.4rem;
       }
     }
+
     .blog-main {
       padding: 20px 0;
     }
+
     .blog-title {
       margin: 10px 0 20px 0;
     }
+
     .blog-meta {
       font-size: 14px;
       margin: 10px 0 20px 0;
       color: #222;
     }
+
     .blog-meta a {
       color: #27ae60;
     }
+
+    .blog-option{
+      font-size: 14px;
+      color: #6b6b6b;
+    }
+
+    .blog-option a{
+      color: #6b6b6b;
+    }
+
+    .edit-label{
+      float: left; 
+      margin-left: 10px;
+    }
+
+    .edit-status{
+      position: static;
+      padding-right: 220px;
+    }
+
     .blog-pagination a {
       font-size: 1.4rem;
     }
+
+    .blog-content {
+    max-width: 800px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+
     .blog-content img {
       max-width: 100%;
       height: auto;
     }
+
     .blog-footer {
       padding: 10px 0;
       text-align: center;
     }
+
     .collection-list a{
       color:#434343;
     }
+
     .collection-list-add {
       float:right;
     }
+
     .content-icon {
       float: right;
       margin: 0 10px;
     }
+
   </style>
 </head>
 
 <body>
 
   <!-- header -->
-    <header class="am-topbar">
-      <h1 class="am-topbar-brand">
-        <a href="#">My RSS</a>
-      </h1>
-  
-      <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
-          class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
-  
-      <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
-        <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
- 		  	<li><a href="Home_Page.html">发现</a></li>
-	        <li><a href="Share.html">分享</a></li>
-	        <li><a href="Collection.html">收藏</a></li>
-	        <li><a href="Group.html">小组</a></li>
-			<li class="am-active"><a href="Source.html">来源</a></li>			
-			<li><a href="Personal_information.html" >个人信息</a></li>
-        </ul>
-  		</div>	
-    </header>
+  <header class="am-topbar">
+    <h1 class="am-topbar-brand">
+      <a href="#">My RSS</a>
+    </h1>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
+        class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+      <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
+        <li><a href="Home_Page.html">发现</a></li>
+        <li><a href="Share.html">分享</a></li>
+        <li><a href="Collection.html">收藏</a></li>
+        <li><a href="Group.html">小组</a></li>
+        <li class="am-active"><a href="Source.html">来源</a></li>
+        <li><a href="Personal_information.html">个人信息</a></li>
+      </ul>
+    </div>
+  </header>
+
 
   <div class="am-g am-g-fixed blog-g-fixed">
     <!-- catalogue -->
     <div class="am-u-md-4 blog-sidebar">
       <div class="am-panel-group">
         <section class="am-panel am-panel-default">
-          <div class="am-panel-hd">关于收藏</div>
+          <div class="am-panel-hd">关于RSS</div>
           <div class="am-panel-bd">
-            <p>我们在首页上为你推荐了最新的RSS文章，你可以收藏到这里，以备以后查看。</p>
-            <p>你也可以在这里导入自己的RSS。</p>
-            <button type="button" class="am-btn am-btn-success am-btn-sm" id="collection-prompt-toggle">导入RSS</button>
+            <p>我们在首页上为你推荐了RSS源，你可以订阅到这里，以备以后查看。</p>
+            <p>你也可以在这里导入自己喜欢的RSS源，注意：请输入标准RSS格式（xml格式）。</p>
+						<p>例如：http://www.people.com.cn/rss/politics.xml</p>
+            <button type="button" class="am-btn am-btn-success am-btn-sm" id="entry-save-toggle">导入RSS源</button>
           </div>
 
-          <div class="am-modal am-modal-prompt" tabindex="-1" id="collection-prompt">
+          <!-- save entry-->
+          <div class="am-modal am-modal-prompt" tabindex="-1" id="save-confirm">
             <div class="am-modal-dialog">
-              <div class="am-modal-hd">导入RSS</div>
+              <div class="am-modal-hd">导入RSS源</div>
               <div class="am-modal-bd">
-                请将需要导入的文章链接粘贴到下方文本框内
-                <input type="text" class="am-modal-prompt-input">
+                  <p>请输入RSS链接</p>
+                  <input type="text" class="am-modal-prompt-input" id="new-entry-link">
+                
               </div>
               <div class="am-modal-footer">
                 <span class="am-modal-btn" data-am-modal-confirm>导入</span>
@@ -110,15 +152,14 @@
         </section>
 
         <section class="am-panel am-panel-default">
-          <div class="am-panel-hd">RSS列表
-            <a href="" class="collection-list-add">添加</a>
+          <div class="am-panel-hd">RSS源
+            <a class="collection-list-add" id="collection-new-toggle" onclick="BatchRefresh()">刷新</a>
           </div>
-          <ul class="am-nav collection-list">
-            <li class="am-active"><a href="#">IT之家</a></li>
-            <li><a href="#">知乎每日精选</a></li>
-            <li><a href="#">少数派</a></li>
-            <li><a href="#">什么值得买</a></li>
+          <ul class="am-nav collection-list" id="mylist">
+            <!-- collection list -->
           </ul>
+
+          
         </section>
       </div>
     </div>
@@ -128,23 +169,21 @@
 
       <section class="am-panel am-panel-primary">
         <header class="am-panel-hd">
-          <h3 class="am-panel-title">IT之家
-            <a class="am-icon-remove content-icon" id="collection-remove-toggle"></a>
-            <a class="am-icon-edit content-icon"></a>
+          <h3 class="am-panel-title">
+            <label value="" id="collection-name">默认收藏夹</label>
+            <a class="am-icon-remove content-icon" id="collection-delete-toggle"></a>
           </h3>
         </header>
-				<div class="am-panel-bd">
-					www.IThome.com/rss/
-				</div>
         <div class="am-panel-bd">
-          创建于 2018/09/10 · 公开
+           <a id="collection-status"></a>
         </div>
 
-        <div class="am-modal am-modal-confirm" tabindex="-1" id="remove-confirm">
+        <!-- collection delete confirm -->
+        <div class="am-modal am-modal-confirm" tabindex="-1" id="collection-delete-confirm">
           <div class="am-modal-dialog">
-            <div class="am-modal-hd">删除RSS</div>
+            <div class="am-modal-hd">取消订阅</div>
             <div class="am-modal-bd">
-              你确定要删除这个RSS吗？
+              你确定要取消订阅吗？
             </div>
             <div class="am-modal-footer">
               <span class="am-modal-btn" data-am-modal-cancel>取消</span>
@@ -153,43 +192,46 @@
           </div>
         </div>
 
+        <!-- edit confirm -->
+        
       </section>
 
+      <section id="articles">
 
-      
+        <article class="blog-main">
+          <h3 class="am-article-title blog-title">
+            <a href="#">Google fonts 的字體（display 篇）</a>
+          </h3>
+          <h4 class="am-article-meta blog-meta">by <a href="">User</a> · 2018/06/17 · <a href="#">CSDN</a></h4>
+          <div class="am-g blog-content am-u-lg-12">
 
-      <article class="blog-main">
-        <h3 class="am-article-title">
-          <a href="#">番茄花园Ghost Win7 x32位家庭纯净版v2018.12</a>
-        </h3>
-        <h4 class="am-article-meta blog-meta">by <a href="">ben</a> · 2018/08/20 · <a href="#">简书</a>
-        </h4>
-        <div class="am-g blog-content">
-          <div class="am-u-lg-12">
-            <p>by ITeye论坛最新讨论 · 12/19/18 9:42 PM · ITeye论坛最新讨论</p>
+            <p>你自信滿滿的跟客戶進行第一次 demo。秀出你精心設計的內容時，你原本期許客戶冷不防地掉下感動的眼淚。</p>
+            <p>因為那實在是太高級了。</p>
+
+          </div>
+        </article>
+        <h4 class="am-article-meta blog-option"><a class="entry-delete-option">删除</a></h4>
+        <hr class="am-article-divider blog-hr">
+
+      </section>
+
+      <!-- entry delete -->
+      <div class="am-modal am-modal-confirm" tabindex="-1" id="entry-delete-confirm">
+        <div class="am-modal-dialog">
+          <div class="am-modal-hd">删除文章</div>
+          <div class="am-modal-bd">
+            你确定要删除这篇文章吗？
+          </div>
+          <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
           </div>
         </div>
-      </article>
-
-      <hr class="am-article-divider blog-hr">
-
-      <article class="blog-main">
-        <h3 class="am-article-title blog-title">
-          <a href="#">Confluence 6 如何让我的小组成员知道那些内容是重要的</a>
-        </h3>
-        <h4 class="am-article-meta blog-meta">by <a href="">User</a> · 2018/06/17 · <a href="#">CSDN</a></h4>
-        <div class="am-g blog-content">
-          <div class="am-u-lg-12">
-            <p>by 综合技术论坛最新讨论 - ITeye · 12/19/18 9:42 PM · 综合技术论坛最新讨论 - ITeye</p>
-          </div>
-        </div>
-      </article>
-
-      <hr class="am-article-divider blog-hr">
+      </div>
 
       <ul class="am-pagination blog-pagination">
-        <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
-        <li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
+        <li class="am-pagination-prev"><a onclick="goLastPage()">&laquo; 上一页</a></li>
+        <li class="am-pagination-next"><a onclick="goNextPage()">下一页 &raquo;</a></li>
       </ul>
     </div>
 
@@ -208,44 +250,441 @@
   <![endif]-->
 
   <!--[if (gte IE 9)|!(IE)]><!-->
-  <script src="assets/js/jquery.min.js"></script>
+  <!-- <script src="assets/js/jquery.min.js"></script> -->
   <!--<![endif]-->
-  <script src="assets/js/amazeui.min.js"></script>
-<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+  <!-- <script src="assets/js/amazeui.min.js"></script> -->
 
-<script>
-	licolection = document.getElementById("nav").childNodes;
-	for (i = 0; i < parseInt(licolection.length / 2); ++i) {
-		element = licolection[i*2 + 1].childNodes[0];
-		element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
-	}
-</script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+  <script src="assets/js/amazeui.min.js"></script>
 
   <script>
-    $(function () {
-      $('#collection-prompt-toggle').on('click', function () {
-        $('#collection-prompt').modal({
+    licolection = document.getElementById("nav").childNodes;
+    for (i = 0; i < licolection.length / 2; ++i) {
+      element = licolection[i * 2 + 1].childNodes[0];
+      element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
+    }
+  </script>
+
+  <script>
+    var pageNum = 1;
+    //初始化页面
+    List();
+    ListCollection(1);
+    $(EntryDeleteConfirm());
+
+    //事件监听
+    $(CollectionDeleteConfirm());
+    $(CollectionEditCheck());
+    $(EntrySaveConfirm());
+    //注意该监听需要在页面生成完毕后开始
+    // $(EntryDeleteConfirm());
+
+    //DONE: collection-delete-confirm
+    function CollectionDeleteConfirm() {
+      $('#collection-delete-toggle').on('click', function () {
+        $('#collection-delete-confirm').modal({
           relatedTarget: this,
-          onConfirm: function (e) {
-            alert('你输入的是：' + e.data || '')
+          onConfirm: function () {
+            CollectionDelete();
           }
         });
       });
-      $('#collection-remove-toggle').on('click', function () {
-        $('#remove-confirm').modal({
+    }
+
+    
+
+    //DONE: collection-new-confirm
+    var newStatus = 3;//编辑后的收藏夹权限
+    function CollectionEditCheck() {
+      $('#new-selected').on('change', function () {
+        newStatus = $(this).val();
+      });
+    }
+    function CollectionNewConfirm() {
+      $('#collection-new-toggle').on('click', function () {
+        $('#new-confirm').modal({
           relatedTarget: this,
           onConfirm: function () {
-            alert("已成功删除！");
-          },
-          onCancel: function () {
+            var title = document.getElementById("new-title").value;
+            var status = newStatus;
+            if ("" != title) {
+              CollectionSave();
+            } else {
+              alert("请输入收藏夹名称并选择公开权限");
+            }
           }
-        }); 
+        });
       });
-    });
+    }
+
+    //TODO: save-confirm
+    function EntrySaveConfirm() {
+      $('#entry-save-toggle').on('click', function () {
+        $('#save-confirm').modal({
+          relatedTarget: this,
+          onConfirm: function () {
+            var link = document.getElementById("new-entry-link").value;
+            if ("" != link) {
+              EntrySave();
+            } else {
+              alert("请输入链接");
+            }
+
+          }
+        });
+      });
+    }
+
+    //entry-delete-confirm
+    function EntryDeleteConfirm() {
+      $('#articles').find('.entry-delete-option').add('#entry-delete-toggle').
+        on('click', function () {
+          // $('#entry-delete-toggle').on('click', function () {
+          $('#entry-delete-confirm').modal({
+            relatedTarget: this,
+            onConfirm: function () {
+              var entryId = this.relatedTarget.id
+              RemoveEntry(entryId);
+            }
+          });
+        });
+    }
+
+    function goLastPage() {
+      if (pageNum == 1)
+        return;
+      else {
+        pageNum--;
+        ListCollection(pageNum);
+      }
+    }
+
+    function goNextPage() {
+      pageNum++;
+      ListCollection(pageNum);
+    }
+
+
+    //DONE 获取所有公开的收藏夹
+    function List() {
+      var reqId = "1";
+      var reqType = "List";
+      var type = "0";
+      var userID = document.URL.split("?")[1];
+      var device = "pc";
+      var pageSize = 10;
+      var pageNum = 1;
+
+      var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
+        {
+          "type": type,
+          "device": device
+        },
+				"reqUserInfo":{
+					"userId": userID
+				},
+        "reqPageInfo":
+        {
+          "pageSize": pageSize,
+          "pageNum": pageNum
+        }
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/source/list",
+          // get与post的data格式不同
+          data: {
+            reqId: reqId,
+            reqType: reqType,
+            reqParam: JSON.stringify(
+              {
+                "device": device,
+                "type": type
+              }),
+						reqUserInfo: JSON.stringify(
+							{
+								"userId": userID
+							}),
+            reqPageInfo: JSON.stringify(
+              {
+                "pageSize": pageSize,
+                "pageNum": pageNum
+              })
+          },
+          datatype: "json",
+          type: "GET",
+          async: false,
+          contentType: "application/json",
+          success: function (objResult) {
+            //显示所有公开收藏夹信息
+            var collectionList = document.getElementById("mylist");
+            for (var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
+              var collection = document.createElement("li");
+              var link = document.createElement("a");
+							var rsslink = objResult.resResult.curData.content[i].link;
+              var id = objResult.resResult.curData.content[i].sourceId;//收藏夹ID 
+              var name = objResult.resResult.curData.content[i].name;//收藏夹名字
+              link.id = id;
+              link.text = name;
+							link.setAttribute("value", rsslink);
+              link.setAttribute("onclick", "changeCollection(this)");
+              if (i == 0) {
+                collection.className = "am-active";//默认激活第一个收藏夹
+                var cur = document.getElementById("collection-name")
+                cur.innerText = name;
+                cur.setAttribute("value", id);
+                document.getElementById("collection-status").innerText = rsslink;
+              }
+              collection.appendChild(link);
+              collectionList.appendChild(collection);
+            }
+
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
+
     
-	
+
+    function changeCollection(obj) {
+      var collectionId = document.getElementById("collection-name").getAttribute("value");
+      document.getElementById(collectionId).parentNode.className = "";
+
+      obj.parentNode.className = "am-active";
+      //获取当前激活的收藏夹的文章
+      var name = obj.text;
+      var id = obj.id;
+      var rsslink = obj.getAttribute("value");
+      var cur = document.getElementById("collection-name")
+      cur.innerText = name;
+      cur.setAttribute("value", id);
+      document.getElementById("collection-status").innerText = rsslink;
+      ListCollection(1);
+      $(EntryDeleteConfirm());
+    }
+
+
+    //DONE 获得收藏夹所有的文章
+    function ListCollection(pageNum) {
+      var reqId = "1";
+      var reqType = "ListBySource";
+      var userId = document.URL.split("?")[1];
+      var sourceId = document.getElementById("collection-name").getAttribute("value");
+      var device = "pc";
+      var pageSize = 3;
+
+
+      var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
+        {
+          "sourceId": sourceId,
+          "device": device
+        },
+        "reqPageInfo":
+        {
+          "pageSize": pageSize,
+          "pageNum": pageNum
+        }
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/entry/list/source",
+          data: {
+            reqId: reqId,
+            reqType: reqType,
+            reqParam: JSON.stringify(
+              {
+                "sourceId": sourceId,
+                "device": device
+              }),
+            reqPageInfo: JSON.stringify(
+              {
+                "pageSize": pageSize,
+                "pageNum": pageNum
+              })
+          },
+          datatype: "json",
+          type: "GET",
+          async: false,
+          contentType: "application/json",
+          success: function (objResult) {
+            var articles = document.getElementById("articles");
+            articles.innerHTML = "";//清空页面上的现有文章信息
+            for (var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
+              var article = document.createElement("article");
+              article.className = "blog-main";
+
+              //标题
+              var h3 = document.createElement("h3");
+              h3.className = "am-article-title blog-title";
+              var a1 = document.createElement("a");
+              a1.href = objResult.resResult.curData.content[i].entryLink;//文章链接
+              a1.text = objResult.resResult.curData.content[i].title;//文章标题
+              h3.appendChild(a1);
+              article.appendChild(h3);
+
+              //"by <a href="">User</a> · 2018/06/17 · <a href="#">CSDN</a>"
+              var meta = document.createElement("h4");
+              meta.className = "am-article-meta blog-meta";
+              var by = document.createTextNode("by ");
+              var author = document.createElement("a");
+              author.text = objResult.resResult.curData.content[i].sourceName;//TODO:作者?
+              var updateTime = objResult.resResult.curData.content[i].updateTime;//时间
+              var time = document.createTextNode(updateTime);
+              var source = document.createElement("a");
+              source.text = objResult.resResult.curData.content[i].sourceName;//RSS来源
+              var split1 = document.createTextNode(" · ");
+              meta.appendChild(by);
+              meta.appendChild(author);
+              meta.appendChild(split1);
+              meta.appendChild(time);
+              article.appendChild(meta);
+
+              //内容
+              var content = document.createElement("div");
+              content.className = "am-g blog-content am-u-lg-12";
+              var p = document.createElement("p");
+              p.className = "blog-content";
+              p.innerText = objResult.resResult.curData.content[i].description;//文章内容
+              content.appendChild(p);
+              article.appendChild(content);
+
+             
+
+              var hr = document.createElement("hr");
+              hr.className = "am-article-divider blog-hr";
+
+              articles.appendChild(article);
+              articles.appendChild(hr);
+            }
+
+
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
+
+    
+
+    //刷新
+    function BatchRefresh() {
+      var reqId = "1";
+      var reqType = "BatchRefresh";
+      var userId = document.URL.split("?")[1];
+
+      var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqUserInfo":
+        {
+          "userId": userId
+        }
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/source/rss/batch/refresh",
+          data: JSON.stringify(objParam),
+          datatype: "json",
+          type: "POST",
+          contentType: "application/json",
+          success: function (objResult) {
+						alert("刷新成功！");
+            window.location.href = "Source.html?" + document.URL.split("?")[1];
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
+
+    //删除RSS
+    function CollectionDelete() {
+      var reqId = "1";
+      var reqType = "Delete";
+      var sourceId = document.getElementById("collection-name").getAttribute("value");
+
+      var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
+        {
+          "sourceId": sourceId
+        }
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/source/delete",
+          data: JSON.stringify(objParam),
+          datatype: "json",
+          type: "POST",
+          contentType: "application/json",
+          success: function (objResult) {
+            window.location.href = "Source.html?" + document.URL.split("?")[1];
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
+
+    //新建RSS
+    function EntrySave() {
+      var reqId = "1";
+      var reqType = "SingleLink";
+      var link = document.getElementById("new-entry-link").value;
+      var userId= document.URL.split("?")[1];
+
+      var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
+        {
+          "link": link,
+        },
+				"reqUserInfo":{
+					"userId": userId
+				}
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/source/rss/single/link",
+          data: JSON.stringify(objParam),
+          datatype: "json",
+          type: "POST",
+          contentType: "application/json",
+          success: function (objResult) {
+            window.location.href = "Source.html?" + document.URL.split("?")[1];
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
+
+   
   </script>
 
 
 </body>
+
 </html>
