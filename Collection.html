@@ -104,12 +104,12 @@
 
     <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
       <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
-		  	<li><a href="Home_Page.html">发现</a></li>
-	        <li><a href="Share.html">分享</a></li>
-	        <li class="am-active"><a href="Collection.html">收藏</a></li>
-	        <li><a href="Group.html">小组</a></li>
-			<li><a href="Source.html">来源</a></li>			
-			<li><a href="Personal_information.html" >个人信息</a></li>
+        <li><a href="Home_Page.html">发现</a></li>
+        <li><a href="Share.html">分享</a></li>
+        <li class="am-active"><a href="Collection.html">收藏</a></li>
+        <li><a href="Group.html">小组</a></li>
+        <li><a href="Source.html">来源</a></li>
+        <li><a href="Personal_information.html">个人信息</a></li>
       </ul>
     </div>
   </header>
@@ -132,8 +132,15 @@
             <div class="am-modal-dialog">
               <div class="am-modal-hd">导入文章</div>
               <div class="am-modal-bd">
-                请将需要导入的文章链接粘贴到下方文本框内
-                <input type="text" class="am-modal-prompt-input">
+                <div>
+                  <p>请输入文章标题</p>
+                  <input type="text" class="am-modal-prompt-input" id="new-entry-title">
+                </div>
+                <p></p>
+                <div>
+                  <p>请将需要导入的文章链接粘贴到下方文本框内</p>
+                  <input type="text" class="am-modal-prompt-input" id="new-entry-link">
+                </div>
               </div>
               <div class="am-modal-footer">
                 <span class="am-modal-btn" data-am-modal-confirm>导入</span>
@@ -269,8 +276,8 @@
       </div>
 
       <ul class="am-pagination blog-pagination">
-        <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
-        <li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
+        <li class="am-pagination-prev"><a onclick="goLastPage()">&laquo; 上一页</a></li>
+        <li class="am-pagination-next"><a onclick="goNextPage()">下一页 &raquo;</a></li>
       </ul>
     </div>
 
@@ -306,6 +313,11 @@
   </script>
 
   <script>
+    var pageNum = 1;
+    //初始化页面
+    List();
+    ListCollection(1);
+    $(EntryDeleteConfirm());
 
     //事件监听
     $(CollectionDeleteConfirm());
@@ -335,11 +347,9 @@
         curStatus = $(this).val();
       });
     }
-
     function CollectionEditConfirm() {
       var title;
       var status;
-
       //initial
       $('#edit-confirm').on('open.modal.amui', function () {
         title = document.getElementById("collection-name").innerText;
@@ -363,15 +373,13 @@
       });
     }
 
+    //DONE: collection-new-confirm
     var newStatus = 3;//编辑后的收藏夹权限
     function CollectionEditCheck() {
       $('#new-selected').on('change', function () {
         newStatus = $(this).val();
       });
     }
-
-
-    //DONE: collection-new-confirm
     function CollectionNewConfirm() {
       $('#collection-new-toggle').on('click', function () {
         $('#new-confirm').modal({
@@ -379,8 +387,8 @@
           onConfirm: function () {
             var title = document.getElementById("new-title").value;
             var status = newStatus;
-            if ("" != title || 3 != status) {
-              Save();
+            if ("" != title && 3 != status) {
+              CollectionSave();
             } else {
               alert("请输入收藏夹名称并选择公开权限");
             }
@@ -395,14 +403,20 @@
         $('#save-confirm').modal({
           relatedTarget: this,
           onConfirm: function () {
-
+            var title = document.getElementById("new-entry-title").value;
+            var link = document.getElementById("new-entry-link").value;
+            if ("" != title && "" != link) {
+              EntrySave();
+            } else {
+              alert("请输入文章标题和链接");
+            }
 
           }
         });
       });
     }
 
-    //TODO: entry-delete-confirm
+    //entry-delete-confirm
     function EntryDeleteConfirm() {
       $('#articles').find('.entry-delete-option').add('#entry-delete-toggle').
         on('click', function () {
@@ -410,10 +424,27 @@
           $('#entry-delete-confirm').modal({
             relatedTarget: this,
             onConfirm: function () {
+              var entryId = this.relatedTarget.id
+              RemoveEntry(entryId);
             }
           });
         });
     }
+
+    function goLastPage() {
+      if (pageNum == 1)
+        return;
+      else {
+        pageNum--;
+        ListCollection(pageNum);
+      }
+    }
+
+    function goNextPage() {
+      pageNum++;
+      ListCollection(pageNum);
+    }
+
 
     //DONE 获取所有公开的收藏夹
     function List() {
@@ -505,10 +536,7 @@
         });
     }
 
-    //初始化页面
-    List();
-    ListCollection();
-    $(EntryDeleteConfirm());
+    
 
     function changeCollection(obj) {
       var collectionId = document.getElementById("collection-name").getAttribute("value");
@@ -529,20 +557,20 @@
         case "2": status = "完全公开"; break;
       }
       document.getElementById("collection-status").innerText = status;
-      ListCollection();
+      ListCollection(1);
       $(EntryDeleteConfirm());
     }
 
 
     //DONE 获得收藏夹所有的文章
-    function ListCollection() {
+    function ListCollection(pageNum) {
       var reqId = "1";
       var reqType = "ListCollection";
       var userId = document.URL.split("?")[1];
       var collectionId = document.getElementById("collection-name").getAttribute("value");
       var device = "pc";
-      var pageSize = 5;
-      var pageNum = 1;
+      var pageSize = 2;
+
 
       var objParam =
       {
@@ -630,6 +658,7 @@
               var deleteOption = document.createElement("a");
               deleteOption.className = "entry-delete-option";
               deleteOption.text = "删除";
+              deleteOption.id = objResult.resResult.curData.content[i].entryId;//文章ID
               option.appendChild(deleteOption);
 
               var hr = document.createElement("hr");
@@ -640,7 +669,6 @@
               articles.appendChild(hr);
             }
 
-            //TODO: 分页
 
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -702,15 +730,15 @@
     }
 
     //新建收藏夹
-    function Save() {
+    function CollectionSave() {
       var reqId = "1";
       var reqType = "Save";
-      var name =  document.getElementById("new-title").value;
-		  var description = "";
-		  var publicStatus = newStatus;
-		  var userId = document.URL.split("?")[1];
-		
-		  var objParam =
+      var name = document.getElementById("new-title").value;
+      var description = "";
+      var publicStatus = newStatus;
+      var userId = document.URL.split("?")[1];
+
+      var objParam =
       {
         "reqId": reqId,
         "reqType": reqType,
@@ -774,6 +802,74 @@
         });
     }
 
+    //新建文章
+    function EntrySave() {
+      var reqId = "1";
+      var reqType = "Save";
+      var link = document.getElementById("new-entry-link").value;
+      var collectionId = document.getElementById("collection-name").getAttribute("value");
+      var description = "";
+      var title = document.getElementById("new-entry-title").value; 
+
+      var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
+        {
+          "link": link,
+          "collectionId": collectionId,
+          "description": description,
+          "title ": title
+        }
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/entry",
+          data: JSON.stringify(objParam),
+          datatype: "json",
+          type: "POST",
+          contentType: "application/json",
+          success: function (objResult) {
+            window.location.href = "Collection.html?" + document.URL.split("?")[1];
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
+
+    //删除文章
+    function RemoveEntry(entryId) {
+      var reqId = "1";
+      var reqType = "RemoveEntry";
+
+      var objParam =
+      {
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
+        {
+          "entryId": entryId
+        }
+      };
+
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/removeEntry",
+          data: JSON.stringify(objParam),
+          datatype: "json",
+          type: "POST",
+          contentType: "application/json",
+          success: function (objResult) {
+            window.location.href = "Collection.html?" + document.URL.split("?")[1];
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+          }
+        });
+    }
   </script>
 
 
