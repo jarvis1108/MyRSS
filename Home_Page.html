@@ -134,8 +134,9 @@
 </div>
 <div >
    <hr class="am-article-divider blog-hr">
-   <div class="am-u-md-8">
-
+   <div class="am-u-md-8" id = RSSDiv>
+      <div id = "RSSList">
+        <!--
       <article class="blog-main">
         <h3 class="am-article-title blog-title">
           <a href="#">知乎每日精选</a><h5> </h5><a class="am-badge am-badge-success" href="/css/grid">+</a>
@@ -179,12 +180,14 @@
           </div>
         </div>
       </article>
+    -->
+      </div>
 
       <hr class="am-article-divider blog-hr">
 
       <ul class="am-pagination blog-pagination">
-        <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
-        <li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
+        <li class="am-pagination-prev"><a onclick="goLastPage()">&laquo; 上一页</a></li>
+        <li class="am-pagination-next"><a onclick="goNextPage()">下一页 &raquo;</a></li>
       </ul>
     </div>
 
@@ -314,7 +317,119 @@
 <!--<![endif]-->
 <script src="assets/js/amazeui.min.js"></script>
 <script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+  var pageNum = 1;
+  List();
 
+  function List(){
+    var reqId = "1";
+    var reqType = "List";
+    var device = "pc";
+    var userId = document.URL.split("?")[1];
+    var pageSize = 3;
+
+    var objParam = 
+    {
+      "reqId": reqId,
+      "reqType": reqType,
+      "reqParam":
+      {
+        "userId": userId,
+        "device": device
+      },
+      "reqPageInfo":
+      {
+        "pageSize": pageSize,
+        "pageNum": pageNum
+      }
+    };
+
+    $.ajax
+    ({
+      url: "http://120.79.191.240:8089/rssbackend/api/v1/source/list/recommend",
+      data: {
+        reqId: reqId,
+        reqType: reqType,
+        reqParam: JSON.stringify(
+        {
+          "userId": userId,
+          "device": device
+        }),
+        reqPageInfo: JSON.stringify(
+        {
+          "pageSize": pageSize,
+          "pageNum": pageNum
+        })
+      },
+      datatype: "json",
+      type: "GET",
+      async: false,
+      contentType: "application/json",
+      success: function(objResult) {
+        var RSSList = document.getElementById("RSSList");
+        RSSList.innerHTML = "";
+        for(var i = 0; i < objResult.resResult.curData.numberOfElements; i++){
+          var entry = document.createElement("article");
+          var link = document.createElement("a");
+          var htmlName = document.createElement("h1");
+          var htmlAdd = document.createElement("a");
+          var htmlLink = document.createElement("h4");
+          var htmlDescription = document.createElement("div");
+          var htmlDescription_1 = document.createElement("p");
+          var htmlNameLink = document.createElement("a");
+          var hr = document.createElement("hr");
+          hr.className = "am-article-divider blog-hr";
+
+          var name = objResult.resResult.curData.content[i].name;
+          var RSSLink = objResult.resResult.curData.content[i].link;
+          var description = objResult.resResult.curData.content[i].description;
+
+          htmlDescription_1.textContent= "摘要： " + description;
+          link.text = RSSLink;
+          link.href = RSSLink;
+          htmlName.textContent = name;
+          htmlNameLink.href = link;
+
+          htmlAdd.text = "收藏";
+          htmlAdd.href = "#";
+
+
+          htmlLink.appendChild(link);
+          htmlDescription.appendChild(htmlDescription_1);
+          entry.appendChild(htmlName);
+          entry.appendChild(htmlLink);
+          entry.appendChild(htmlDescription);
+          entry.appendChild(htmlAdd);
+          entry.appendChild(hr);
+          RSSList.appendChild(entry);
+
+
+
+        }
+
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alter(XMLHttpRequest.status);
+      }
+    });
+
+  }
+
+  function goLastPage() {
+    if(pageNum == 1)
+      return;
+    else {
+      pageNum--;
+      List();
+    }
+  }
+
+  function goNextPage() {
+    pageNum++;
+    List();
+  }
+
+</script>
 <script>
 	licolection = document.getElementById("nav").childNodes;
 	for (i = 0; i < parseInt(licolection.length / 2); ++i) {
