@@ -1,121 +1,71 @@
 <!DOCTYPE html>
 <html>
 
-	<head lang="en">
-		<meta charset="UTF-8">
-		<title>Group | My RSS</title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
-		<link rel="stylesheet" href="assets/css/amazeui.min.css" />
-		<link rel="stylesheet" href="assets/css/group.css" />
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Group | My RSS</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
+	<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+	<link rel="stylesheet" href="assets/css/group.css" />
 
-	</head>
+</head>
 
-	<body>
+<body>
 
-		  <!-- header -->
-		  <header class="am-topbar">
-		    <h1 class="am-topbar-brand">
-		      <a href="#">My RSS</a>
-		    </h1>
-		
-		    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
-		        class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
-		
-		    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
-		      <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
-		        <li><a href="Home_Page.html">发现</a></li>
-		        <li><a href="Share.html">分享</a></li>
-		        <li><a href="Collection.html">收藏</a></li>
-		        <li class="am-active"><a href="Group.html">小组</a></li>
-		        <li><a href="Source.html">来源</a></li>
-		        <li><a href="Personal_information.html">个人信息</a></li>
-		      </ul>
-		    </div>
-		  </header>
+	<!-- header -->
+	<header class="am-topbar">
+		<h1 class="am-topbar-brand">
+			<a href="#">My RSS</a>
+		</h1>
 
-		<div class="am-g am-g-fixed blog-g-fixed">
-			<div class="am-u-md-4 blog-sidebar">
-				<div class="am-panel-group">
-					<section class="am-panel am-panel-default">
-						<div class="am-panel-hd">小组成员</div>
-						<ul class="am-list blog-list" id="memberlist">
-						</ul>
-					</section>
-					<br />
+		<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span
+			 class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
 
-					<section class="am-panel am-panel-default">
-						<div class="am-panel-hd">我的小组
-							<a class="group-list-add" id="group-new-toggle" style="float: right;">新建</a>
-						</div>
-						<ul class="am-nav collection-list" id="grouplist">
-							<!--group list-->
-						</ul>
+		<div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+			<ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
+				<li><a href="Home_Page.html">发现</a></li>
+				<li><a href="Share.html">分享</a></li>
+				<li><a href="Collection.html">收藏</a></li>
+				<li class="am-active"><a href="Group.html">小组</a></li>
+				<li><a href="Source.html">来源</a></li>
+				<li><a href="Personal_information.html">个人信息</a></li>
+			</ul>
+		</div>
+	</header>
 
-						<!--新建小组 弹窗-->
-						<div class="am-modal am-modal-confirm" tabindex="-1" id="new-confirm">
-							<div class="am-modal-dialog">
-								<div class="am-modal-hd">新建小组</div>
-								<div class="am-modal-bd">
-									<label class="edit-label">组名</label>
-									<input type="text" class="am-modal-prompt-input" id="new-groupName" value="">
-									<br />
-									<label class="edit-label" style="margin-top:5px ;">介绍</label>
-									<input type="text" class="am-modal-prompt-input" id="new-groupdescription" value="">
-								</div>
-								<div class="am-modal-footer">
-									<span class="am-modal-btn" data-am-modal-cancel>取消</span>
-									<span class="am-modal-btn" data-am-modal-confirm>确定</span>
-								</div>
-							</div>
-						</div>
-					</section>
-					<br />
+	<div class="am-g am-g-fixed blog-g-fixed">
+		<div class="am-u-md-4 blog-sidebar">
+			<div class="am-panel-group">
+				<section class="am-panel am-panel-default">
+					<div class="am-panel-hd">小组成员</div>
+					<ul class="am-list blog-list" id="memberlist">
+					</ul>
+				</section>
+				<br />
 
-				</div>
-			</div>
-
-			<div class="am-u-md-8">
-
-				<section class="am-panel am-panel-primary">
-					<header class="am-panel-hd">
-						<h3 class="am-panel-title">
-          	<label value="" id="group-name"></label>
-            <a class="am-icon-remove content-icon" id="group-delete-toggle"></a>
-            <a class="am-icon-edit content-icon" id="group-edit-toggle"></a>
-          </h3>
-					</header>
-					<div class="am-panel-bd">创建于
-						<a id="group-creatTime"></a>
+				<section class="am-panel am-panel-default">
+					<div class="am-panel-hd">我的小组
+						<a class="group-list-add" id="group-new-toggle" style="float: right;">新建</a>
 					</div>
-					<div class="am-panel-bd" id="group-description"></div>
+					<ul class="am-nav collection-list" id="grouplist">
+						<!--group list-->
+					</ul>
 
-					<!-- 删除小组 确认弹框 -->
-					<div class="am-modal am-modal-confirm" tabindex="-1" id="group-delete-confirm">
+					<!--新建小组 弹窗-->
+					<div class="am-modal am-modal-confirm" tabindex="-1" id="new-confirm">
 						<div class="am-modal-dialog">
-							<div class="am-modal-hd">删除小组</div>
-							<div class="am-modal-bd">你确定要删除这个小组吗？</div>
-							<div class="am-modal-footer">
-								<span class="am-modal-btn" data-am-modal-cancel>取消</span>
-								<span class="am-modal-btn" data-am-modal-confirm>确定</span>
-							</div>
-						</div>
-					</div>
-
-					<!-- 确认修改 弹窗 -->
-					<div class="am-modal am-modal-confirm" tabindex="-1" id="edit-confirm">
-						<div class="am-modal-dialog">
-							<div class="am-modal-hd">编辑小组</div>
+							<div class="am-modal-hd">新建小组</div>
 							<div class="am-modal-bd">
 								<label class="edit-label">组名</label>
-								<input type="text" class="am-modal-prompt-input" id="edit-title" value="">
+								<input type="text" class="am-modal-prompt-input" id="new-groupName" value="">
 								<br />
-								<label class="edit-label" style="margin-top:5px ;">简介</label>
-								<input type="text" class="am-modal-prompt-input" id="edit-description" value="">
+								<label class="edit-label" style="margin-top:5px ;">介绍</label>
+								<input type="text" class="am-modal-prompt-input" id="new-groupdescription" value="">
 							</div>
 							<div class="am-modal-footer">
 								<span class="am-modal-btn" data-am-modal-cancel>取消</span>
@@ -124,540 +74,601 @@
 						</div>
 					</div>
 				</section>
+				<br />
 
-				<section id="articles">
-					<article class="blog-main">
-						<h3 class="am-article-title blog-title">
-            <a href="#">Google fonts 的字體（display 篇）</a>
-          </h3>
-						<h4 class="am-article-meta blog-meta">by <a href="">User</a> · 2018/06/17 · <a href="#">CSDN</a></h4>
-						<div class="am-g blog-content am-u-lg-12">
-
-							<p>你自信滿滿的跟客戶進行第一次 demo。秀出你精心設計的內容時，你原本期許客戶冷不防地掉下感動的眼淚。</p>
-							<p>因為那實在是太高級了。</p>
-
-						</div>
-					</article>
-					<hr class="am-article-divider blog-hr">
-
-				</section>
-
-				<hr class="am-article-divider blog-hr">
-				<ul class="am-pagination blog-pagination">
-					<li class="am-pagination-prev">
-						<a onclick="goLastPage()">&laquo; 上一页</a>
-					</li>
-					<li class="am-pagination-next">
-						<a onclick="goNextPage()">下一页 &raquo;</a>
-					</li>
-				</ul>
 			</div>
 		</div>
 
-		<footer class="blog-footer">
-			<p>Group | My RSS<br />
-				<small>© Copyright 2018</small>
-			</p>
-		</footer>
-		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<div class="am-u-md-8">
 
-		<script src="assets/js/amazeui.min.js"></script>
+			<section class="am-panel am-panel-primary">
+				<header class="am-panel-hd">
+					<h3 class="am-panel-title">
+						<label value="" id="group-name"></label>
+						<a class="am-icon-remove content-icon" id="group-delete-toggle"></a>
+						<a class="am-icon-edit content-icon" id="group-edit-toggle"></a>
+					</h3>
+				</header>
+				<div class="am-panel-bd">创建于
+					<a id="group-creatTime"></a>
+				</div>
+				<div class="am-panel-bd" id="group-description"></div>
 
-		<script>
-			licolection = document.getElementById("nav").childNodes;
-			for(i = 0; i < licolection.length / 2; ++i) {
-				element = licolection[i * 2 + 1].childNodes[0];
-				element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
+				<!-- 删除小组 确认弹框 -->
+				<div class="am-modal am-modal-confirm" tabindex="-1" id="group-delete-confirm">
+					<div class="am-modal-dialog">
+						<div class="am-modal-hd">删除小组</div>
+						<div class="am-modal-bd">你确定要删除这个小组吗？</div>
+						<div class="am-modal-footer">
+							<span class="am-modal-btn" data-am-modal-cancel>取消</span>
+							<span class="am-modal-btn" data-am-modal-confirm>确定</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- 确认修改 弹窗 -->
+				<div class="am-modal am-modal-confirm" tabindex="-1" id="edit-confirm">
+					<div class="am-modal-dialog">
+						<div class="am-modal-hd">编辑小组</div>
+						<div class="am-modal-bd">
+							<label class="edit-label">组名</label>
+							<input type="text" class="am-modal-prompt-input" id="edit-title" value="">
+							<br />
+							<label class="edit-label" style="margin-top:5px ;">简介</label>
+							<input type="text" class="am-modal-prompt-input" id="edit-description" value="">
+						</div>
+						<div class="am-modal-footer">
+							<span class="am-modal-btn" data-am-modal-cancel>取消</span>
+							<span class="am-modal-btn" data-am-modal-confirm>确定</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="articles">
+				<article class="blog-main">
+					<h3 class="am-article-title blog-title">
+						<a href="#">Google fonts 的字體（display 篇）</a>
+					</h3>
+					<h4 class="am-article-meta blog-meta">by <a href="">User</a> · 2018/06/17 · <a href="#">CSDN</a></h4>
+					<div class="am-g blog-content am-u-lg-12">
+
+						<p>你自信滿滿的跟客戶進行第一次 demo。秀出你精心設計的內容時，你原本期許客戶冷不防地掉下感動的眼淚。</p>
+						<p>因為那實在是太高級了。</p>
+
+					</div>
+				</article>
+				<hr class="am-article-divider blog-hr">
+
+			</section>
+
+			<hr class="am-article-divider blog-hr">
+			<ul class="am-pagination blog-pagination">
+				<li class="am-pagination-prev">
+					<a onclick="goLastPage()">&laquo; 上一页</a>
+				</li>
+				<li class="am-pagination-next">
+					<a onclick="goNextPage()">下一页 &raquo;</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<footer class="blog-footer">
+		<p>Group | My RSS<br />
+			<small>© Copyright 2018</small>
+		</p>
+	</footer>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+	<script src="assets/js/amazeui.min.js"></script>
+
+	<script>
+
+		function Logincheck() {
+			var userId = document.URL.split("html")[1];
+			if (userId == "") {
+				alert("请先登录或注册！");
+				window.location.href = "Login.html";
 			}
-		</script>
+		}
+		Logincheck();
 
-		<script>
-			var pageNum = 1;
 
-			DetailByUser();
-			ListPublicToGroup(1);
-			//Member();
+		licolection = document.getElementById("nav").childNodes;
+		for (i = 0; i < licolection.length / 2; ++i) {
+			element = licolection[i * 2 + 1].childNodes[0];
+			element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
+		}
+	</script>
 
-			function goLastPage() {
-				if(pageNum == 1)
-					return;
-				else {
-					pageNum--;
-					ListPublicToGroup(pageNum);
-				}
-			}
+	<script>
+		var pageNum = 1;
 
-			function goNextPage() {
-				pageNum++;
+		DetailByUser();
+		ListPublicToGroup(1);
+		//Member();
+
+		function goLastPage() {
+			if (pageNum == 1)
+				return;
+			else {
+				pageNum--;
 				ListPublicToGroup(pageNum);
 			}
+		}
 
-			//事件监听
-			$(GroupDeleteConfirm());
-			$(GroupEditConfirm());
-			$(NewGroup());
-			//DONE: collection-delete-confirm
-			function GroupDeleteConfirm() {
-				$('#group-delete-toggle').on('click', function() {
-					$('#group-delete-confirm').modal({
-						relatedTarget: this,
-						onConfirm: function() {
-							Delete();
-						}
-					});
-				});
-			}
+		function goNextPage() {
+			pageNum++;
+			ListPublicToGroup(pageNum);
+		}
 
-			function GroupEditConfirm() {
-				var title;
-				var description;
-				$('#edit-confirm').on('open.modal.amui', function() {
-					title = document.getElementById("edit-title").value;
-					document.getElementById("edit-title").setAttribute("value", title);
-					description = document.getElementById("edit-description").value;
-					document.getElementById("edit-description").setAttribute("value", description);
-				});
-
-				$('#group-edit-toggle').on('click', function() {
-					$('#edit-confirm').modal({
-						relatedTarget: this,
-						onConfirm: function() {
-
-							var curTitle = document.getElementById("edit-title").value;
-							var curDescription = document.getElementById("edit-description").value;
-							if(curTitle != title || curDescription != description) {
-								console.log("change");
-								Update();
-							}
-						}
-					});
-				});
-			}
-
-			function NewGroup() {
-				$('#group-new-toggle').on('click', function() {
-					$('#new-confirm').modal({
-						relatedTarget: this,
-						onConfirm: function() {
-							var title = document.getElementById("new-groupName").value;
-							var description = document.getElementById("new-groupdescription").value;
-							if("" != title && "" != description) {
-								Save();
-							} else {
-								alert("请输入小组名和简介");
-							}
-
-						}
-					});
-				});
-			}
-
-			// 删除小组
-			function Delete() {
-				var reqId = "1";
-				var reqType = "Delete";
-				var groupId = document.getElementById("group-name").getAttribute("value");
-
-				var objParam = {
-					"reqId": reqId,
-					"reqType": reqType,
-					"reqParam": {
-						"groupId": groupId
-					}
-				};
-
-				$.ajax({
-					url: "http://120.79.191.240:8089/rssbackend/api/v1/group/delete",
-					data: JSON.stringify(objParam),
-					datatype: "json",
-					type: "POST",
-					async: false,
-					contentType: "application/json",
-					success: function(objResult) {
-						window.location.href = "Group.html?" + document.URL.split("?")[1];
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(XMLHttpRequest.status);
+		//事件监听
+		$(GroupDeleteConfirm());
+		$(GroupEditConfirm());
+		$(NewGroup());
+		//DONE: collection-delete-confirm
+		function GroupDeleteConfirm() {
+			$('#group-delete-toggle').on('click', function () {
+				$('#group-delete-confirm').modal({
+					relatedTarget: this,
+					onConfirm: function () {
+						Delete();
 					}
 				});
-			}
+			});
+		}
 
-			// 获取用户所在的小组信息(pc)  get 用法
-			function DetailByUser() {
-				var reqId = "1";
-				var reqType = "DetailByUser";
-				var device = "pc";
-				var userId = document.URL.split("?")[1];
-				var pageSize = 10;
-				var pageNum = 1;
+		function GroupEditConfirm() {
+			var title;
+			var description;
+			$('#edit-confirm').on('open.modal.amui', function () {
+				title = document.getElementById("edit-title").value;
+				document.getElementById("edit-title").setAttribute("value", title);
+				description = document.getElementById("edit-description").value;
+				document.getElementById("edit-description").setAttribute("value", description);
+			});
 
-				var objParam = {
-					"reqId": reqId,
-					"reqType": reqType,
-					"reqParam": {
+			$('#group-edit-toggle').on('click', function () {
+				$('#edit-confirm').modal({
+					relatedTarget: this,
+					onConfirm: function () {
+
+						var curTitle = document.getElementById("edit-title").value;
+						var curDescription = document.getElementById("edit-description").value;
+						if (curTitle != title || curDescription != description) {
+							console.log("change");
+							Update();
+						}
+					}
+				});
+			});
+		}
+
+		function NewGroup() {
+			$('#group-new-toggle').on('click', function () {
+				$('#new-confirm').modal({
+					relatedTarget: this,
+					onConfirm: function () {
+						var title = document.getElementById("new-groupName").value;
+						var description = document.getElementById("new-groupdescription").value;
+						if ("" != title && "" != description) {
+							Save();
+						} else {
+							alert("请输入小组名和简介");
+						}
+
+					}
+				});
+			});
+		}
+
+		// 删除小组
+		function Delete() {
+			var reqId = "1";
+			var reqType = "Delete";
+			var groupId = document.getElementById("group-name").getAttribute("value");
+
+			var objParam = {
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam": {
+					"groupId": groupId
+				}
+			};
+
+			$.ajax({
+				url: "http://120.79.191.240:8089/rssbackend/api/v1/group/delete",
+				data: JSON.stringify(objParam),
+				datatype: "json",
+				type: "POST",
+				async: false,
+				contentType: "application/json",
+				success: function (objResult) {
+					window.location.href = "Group.html?" + document.URL.split("?")[1];
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+		}
+
+		// 获取用户所在的小组信息(pc)  get 用法
+		function DetailByUser() {
+			var reqId = "1";
+			var reqType = "DetailByUser";
+			var device = "pc";
+			var userId = document.URL.split("?")[1];
+			var pageSize = 10;
+			var pageNum = 1;
+
+			var objParam = {
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam": {
+					"device": device
+				},
+				"reqUserInfo": {
+					"userId": userId
+				},
+				"reqPageInfo": {
+					"pageSize": pageSize,
+					"pageNum": pageNum
+				}
+			};
+			//get用法
+			$.ajax({
+				url: "http://120.79.191.240:8089/rssbackend/api/v1/group/detail/user",
+				data: {
+					reqId: reqId,
+					reqType: reqType,
+					reqParam: JSON.stringify({
 						"device": device
-					},
-					"reqUserInfo": {
+					}),
+					reqUserInfo: JSON.stringify({
 						"userId": userId
-					},
-					"reqPageInfo": {
+					}),
+					reqPageInfo: JSON.stringify({
 						"pageSize": pageSize,
 						"pageNum": pageNum
-					}
-				};
-				//get用法
-				$.ajax({
-					url: "http://120.79.191.240:8089/rssbackend/api/v1/group/detail/user",
-					data: {
-						reqId: reqId,
-						reqType: reqType,
-						reqParam: JSON.stringify({
-							"device": device
-						}),
-						reqUserInfo: JSON.stringify({
-							"userId": userId
-						}),
-						reqPageInfo: JSON.stringify({
-							"pageSize": pageSize,
-							"pageNum": pageNum
-						})
-					},
-					datatype: "json",
-					type: "GET",
-					async: false, //是否异步请求
-					contentType: "application/json",
-					success: function(objResult) {
-						var groupList = document.getElementById("grouplist");
-						for(var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
-							var group = document.createElement("li");
-							var link = document.createElement("a");
-							var id = objResult.resResult.curData.content[i].groupId; //小组id
-							var name = objResult.resResult.curData.content[i].name;
-							var description = objResult.resResult.curData.content[i].description;
-							var userId = objResult.resResult.curData.content[i].userId;
-							var createTime = objResult.resResult.curData.content[i].createTime;
+					})
+				},
+				datatype: "json",
+				type: "GET",
+				async: false, //是否异步请求
+				contentType: "application/json",
+				success: function (objResult) {
+					var groupList = document.getElementById("grouplist");
+					for (var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
+						var group = document.createElement("li");
+						var link = document.createElement("a");
+						var id = objResult.resResult.curData.content[i].groupId; //小组id
+						var name = objResult.resResult.curData.content[i].name;
+						var description = objResult.resResult.curData.content[i].description;
+						var userId = objResult.resResult.curData.content[i].userId;
+						var createTime = objResult.resResult.curData.content[i].createTime;
 
-							link.id = id;
-							link.text = name;
-							link.setAttribute("onclick", "changeGroup(this)");
+						link.id = id;
+						link.text = name;
+						link.setAttribute("onclick", "changeGroup(this)");
 
-							if(i == 0) {
-								group.className = "am-active";
-								var cur = document.getElementById("group-name");
-								cur.innerText = name;
-								cur.setAttribute("value", id);
-								document.getElementById("group-creatTime").innerText = createTime;
-								document.getElementById("group-description").innerText = "小组简介：" + description;
-							}
-							group.appendChild(link);
-							groupList.appendChild(group);
-
+						if (i == 0) {
+							group.className = "am-active";
+							var cur = document.getElementById("group-name");
+							cur.innerText = name;
+							cur.setAttribute("value", id);
+							document.getElementById("group-creatTime").innerText = createTime;
+							document.getElementById("group-description").innerText = "小组简介：" + description;
 						}
-						Member();
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(XMLHttpRequest.status);
+						group.appendChild(link);
+						groupList.appendChild(group);
+
 					}
-				});
-			}
+					Member();
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+		}
 
-			function changeGroup(obj) {
-				var groupId = document.getElementById("group-name").getAttribute("value");
-				document.getElementById(groupId).parentNode.className = "";
+		function changeGroup(obj) {
+			var groupId = document.getElementById("group-name").getAttribute("value");
+			document.getElementById(groupId).parentNode.className = "";
 
-				obj.parentNode.className = "am-active";
-				//获取当前激活的收藏夹的文章
-				var name = obj.text;
-				var id = obj.id;
+			obj.parentNode.className = "am-active";
+			//获取当前激活的收藏夹的文章
+			var name = obj.text;
+			var id = obj.id;
 
-				var cur = document.getElementById("group-name")
-				cur.innerText = name;
-				cur.setAttribute("value", id);
+			var cur = document.getElementById("group-name")
+			cur.innerText = name;
+			cur.setAttribute("value", id);
 
-				Member();
-				ListPublicToGroup(1);
-				DetailById();
+			Member();
+			ListPublicToGroup(1);
+			DetailById();
 
-			}
+		}
 
-			//根据模糊匹配组名获取小组信息（先略
+		//根据模糊匹配组名获取小组信息（先略
 
-			//根据组号获取小组信息 get
-			function DetailById() {
-				var reqId = "1";
-				var reqType = "DetailById";
-				var groupId = document.getElementById("group-name").getAttribute("value");
+		//根据组号获取小组信息 get
+		function DetailById() {
+			var reqId = "1";
+			var reqType = "DetailById";
+			var groupId = document.getElementById("group-name").getAttribute("value");
 
-				var objParam = {
-					"reqId": reqId,
-					"reqType": reqType,
-					"reqParam": {
+			var objParam = {
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam": {
+					"groupId": groupId
+				}
+			};
+			//get用法
+			$.ajax({
+				url: "http://120.79.191.240:8089/rssbackend/api/v1/group/detail/id",
+				data: {
+					reqId: reqId,
+					reqType: reqType,
+					reqParam: JSON.stringify({
 						"groupId": groupId
-					}
-				};
-				//get用法
-				$.ajax({
-					url: "http://120.79.191.240:8089/rssbackend/api/v1/group/detail/id",
-					data: {
-						reqId: reqId,
-						reqType: reqType,
-						reqParam: JSON.stringify({
-							"groupId": groupId
-						})
-					},
-					datatype: "json",
-					type: "GET",
-					async: false, //是否异步请求
-					contentType: "application/json",
-					success: function(objResult) {
-						var id = objResult.resResult.curData.groupId; //小组id
-						var name = objResult.resResult.curData.name;
-						var description = objResult.resResult.curData.description;
-						var userId = objResult.resResult.curData.userId;
-						var createTime = objResult.resResult.curData.createTime;
-						document.getElementById("group-creatTime").innerText = createTime;
-						document.getElementById("group-description").innerText = "小组简介：" + description;
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(XMLHttpRequest.status);
-					}
-				});
-			}
+					})
+				},
+				datatype: "json",
+				type: "GET",
+				async: false, //是否异步请求
+				contentType: "application/json",
+				success: function (objResult) {
+					var id = objResult.resResult.curData.groupId; //小组id
+					var name = objResult.resResult.curData.name;
+					var description = objResult.resResult.curData.description;
+					var userId = objResult.resResult.curData.userId;
+					var createTime = objResult.resResult.curData.createTime;
+					document.getElementById("group-creatTime").innerText = createTime;
+					document.getElementById("group-description").innerText = "小组简介：" + description;
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+		}
 
-			//获得小组成员信息  get
-			function Member() {
-				var reqId = "1";
-				var reqType = "Member";
-				var groupId = document.getElementById("group-name").getAttribute("value");
+		//获得小组成员信息  get
+		function Member() {
+			var reqId = "1";
+			var reqType = "Member";
+			var groupId = document.getElementById("group-name").getAttribute("value");
 
-				var objParam = {
-					"reqId": reqId,
-					"reqType": reqType,
-					"reqParam": {
+			var objParam = {
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam": {
+					"groupId": groupId
+				}
+			};
+
+			$.ajax({
+				url: "http://120.79.191.240:8089/rssbackend/api/v1/group/member",
+				data: {
+					reqId: reqId,
+					reqType: reqType,
+					reqParam: JSON.stringify({
 						"groupId": groupId
+					}),
+				},
+				datatype: "json",
+				type: "Get",
+				async: false, //是否异步请求
+				contentType: "application/json",
+				success: function (objResult) {
+					var memberList = document.getElementById("memberlist");
+					memberList.innerHTML = ""; //每次换组加载清空
+					for (var i = 0; i < objResult.resResult.curData.length; i++) {
+						var member = document.createElement("li");
+						var link = document.createElement("a");
+						var username = objResult.resResult.curData[i].username;
+						var userId = objResult.resResult.curData[i].userId;
+
+						link.userId = userId;
+						link.text = username;
+
+						member.appendChild(link);
+						memberList.appendChild(member);
 					}
-				};
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+		}
 
-				$.ajax({
-					url: "http://120.79.191.240:8089/rssbackend/api/v1/group/member",
-					data: {
-						reqId: reqId,
-						reqType: reqType,
-						reqParam: JSON.stringify({
-							"groupId": groupId
-						}),
-					},
-					datatype: "json",
-					type: "Get",
-					async: false, //是否异步请求
-					contentType: "application/json",
-					success: function(objResult) {
-						var memberList = document.getElementById("memberlist");
-						memberList.innerHTML = ""; //每次换组加载清空
-						for(var i = 0; i < objResult.resResult.curData.length; i++) {
-							var member = document.createElement("li");
-							var link = document.createElement("a");
-							var username = objResult.resResult.curData[i].username;
-							var userId = objResult.resResult.curData[i].userId;
+		//DONE 获得小组所有的文章 get
+		function ListPublicToGroup(pageNum) {
+			var reqId = "1";
+			var reqType = "ListPublicToGroup";
+			var groupId = document.getElementById("group-name").getAttribute("value");
+			var from = "all";
+			var device = "pc";
+			var pageSize = 5;
+			var pageNum = pageNum;
 
-							link.userId = userId;
-							link.text = username;
+			var objParam = {
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam": {
+					"groupId": groupId,
+					"from": from,
+					"device": device
+				},
+				"reqPageInfo": {
+					"pageSize": pageSize,
+					"pageNum": pageNum
+				}
+			};
 
-							member.appendChild(link);
-							memberList.appendChild(member);
-						}
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(XMLHttpRequest.status);
-					}
-				});
-			}
-
-			//DONE 获得小组所有的文章 get
-			function ListPublicToGroup(pageNum) {
-				var reqId = "1";
-				var reqType = "ListPublicToGroup";
-				var groupId = document.getElementById("group-name").getAttribute("value");
-				var from = "all";
-				var device = "pc";
-				var pageSize = 5;
-				var pageNum = pageNum;
-
-				var objParam = {
-					"reqId": reqId,
-					"reqType": reqType,
-					"reqParam": {
+			$.ajax({
+				url: "http://120.79.191.240:8089/rssbackend/api/v1/entry/list/publicToGroup",
+				data: {
+					reqId: reqId,
+					reqType: reqType,
+					reqParam: JSON.stringify({
 						"groupId": groupId,
 						"from": from,
 						"device": device
-					},
-					"reqPageInfo": {
+					}),
+					reqPageInfo: JSON.stringify({
 						"pageSize": pageSize,
 						"pageNum": pageNum
+					})
+				},
+				datatype: "json",
+				type: "GET",
+				async: false,
+				contentType: "application/json",
+				success: function (objResult) {
+					var articles = document.getElementById("articles");
+					articles.innerHTML = ""; //清空页面上的现有文章信息
+					for (var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
+						var article = document.createElement("article");
+						article.className = "blog-main";
+
+						//标题
+						var h3 = document.createElement("h3");
+						h3.className = "am-article-title blog-title";
+						var a1 = document.createElement("a");
+						a1.href = objResult.resResult.curData.content[i].entryLink; //文章链接
+						a1.text = objResult.resResult.curData.content[i].title; //文章标题
+						h3.appendChild(a1);
+						article.appendChild(h3);
+
+						//"by <a href="">User</a> · 2018/06/17 · <a href="#">CSDN</a>"
+						var meta = document.createElement("h4");
+						meta.className = "am-article-meta blog-meta";
+						var by = document.createTextNode("by ");
+						var author = document.createElement("a");
+						author.text = objResult.resResult.curData.content[i].sourceName; //来源
+						var updateTime = objResult.resResult.curData.content[i].updateTime; //时间
+						var time = document.createTextNode(updateTime);
+						var split = document.createTextNode(" · ");
+						meta.appendChild(by);
+						meta.appendChild(author);
+						meta.appendChild(split);
+						meta.appendChild(time);
+
+						article.appendChild(meta);
+
+						//内容
+						var content = document.createElement("div");
+						content.className = "am-g blog-content am-u-lg-12";
+						var p = document.createElement("p");
+						p.className = "blog-content";
+						var description = objResult.resResult.curData.content[i].description; //文章内容
+						//TODO: 过滤文本换行符
+						var dd = description.replace(/<\/?.+?>/g, "");
+						var dds = dd.replace(/ /g, ""); //dds为得到后的内容
+						p.innerText = dds;
+						content.appendChild(p);
+						article.appendChild(content);
+
+						var option = document.createElement("h4");
+						option.className = "am-article-meta blog-option";
+						var deleteOption = document.createElement("a");
+						deleteOption.className = "entry-collect-option";
+						deleteOption.text = "收藏";
+						deleteOption.id = objResult.resResult.curData.content[i].entryId; //文章ID
+						option.appendChild(deleteOption);
+
+						var hr = document.createElement("hr");
+						hr.className = "am-article-divider blog-hr";
+
+						articles.appendChild(article);
+						articles.appendChild(option);
+						articles.appendChild(hr);
 					}
-				};
 
-				$.ajax({
-					url: "http://120.79.191.240:8089/rssbackend/api/v1/entry/list/publicToGroup",
-					data: {
-						reqId: reqId,
-						reqType: reqType,
-						reqParam: JSON.stringify({
-							"groupId": groupId,
-							"from": from,
-							"device": device
-						}),
-						reqPageInfo: JSON.stringify({
-							"pageSize": pageSize,
-							"pageNum": pageNum
-						})
-					},
-					datatype: "json",
-					type: "GET",
-					async: false,
-					contentType: "application/json",
-					success: function(objResult) {
-						var articles = document.getElementById("articles");
-						articles.innerHTML = ""; //清空页面上的现有文章信息
-						for(var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
-							var article = document.createElement("article");
-							article.className = "blog-main";
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+		}
 
-							//标题
-							var h3 = document.createElement("h3");
-							h3.className = "am-article-title blog-title";
-							var a1 = document.createElement("a");
-							a1.href = objResult.resResult.curData.content[i].entryLink; //文章链接
-							a1.text = objResult.resResult.curData.content[i].title; //文章标题
-							h3.appendChild(a1);
-							article.appendChild(h3);
+		//新建小组
+		function Save() {
+			var reqId = "1";
+			var reqType = "Save";
+			var name = document.getElementById("new-groupName").value;
+			var description = document.getElementById("new-groupdescription").value;
+			var userId = document.URL.split("?")[1];
 
-							//"by <a href="">User</a> · 2018/06/17 · <a href="#">CSDN</a>"
-							var meta = document.createElement("h4");
-							meta.className = "am-article-meta blog-meta";
-							var by = document.createTextNode("by ");
-							var author = document.createElement("a");
-							author.text = objResult.resResult.curData.content[i].sourceName; //来源
-							var updateTime = objResult.resResult.curData.content[i].updateTime; //时间
-							var time = document.createTextNode(updateTime);
-							var split = document.createTextNode(" · ");
-							meta.appendChild(by);
-							meta.appendChild(author);
-							meta.appendChild(split);
-							meta.appendChild(time);
+			var objParam = {
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam": {
+					"name": name,
+					"description": description
+				},
+				"reqUserInfo": {
+					"userId": userId
+				}
+			};
 
-							article.appendChild(meta);
+			$.ajax({
+				url: "http://120.79.191.240:8089/rssbackend/api/v1/group",
+				data: JSON.stringify(objParam),
+				datatype: "json",
+				type: "POST",
+				async: false, //是否异步请求
+				contentType: "application/json",
+				success: function (objResult) {
+					window.location.href = "Group.html?" + document.URL.split("?")[1];
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+		}
 
-							//内容
-							var content = document.createElement("div");
-							content.className = "am-g blog-content am-u-lg-12";
-							var p = document.createElement("p");
-							p.className = "blog-content";
-							var description = objResult.resResult.curData.content[i].description; //文章内容
-							//TODO: 过滤文本换行符
-							var dd = description.replace(/<\/?.+?>/g, "");
-							var dds = dd.replace(/ /g, ""); //dds为得到后的内容
-							p.innerText = dds;
-							content.appendChild(p);
-							article.appendChild(content);
+		//更新小组信息
+		function Update() {
+			var reqId = "1";
+			var reqType = "Update";
+			var groupId = document.getElementById("group-name").getAttribute("value");;
+			var name = document.getElementById("edit-title").value;
+			var description = document.getElementById("edit-description").value;;
+			var objParam = {
+				"reqId": reqId,
+				"reqType": reqType,
+				"reqParam": {
+					"groupId": groupId,
+					"name": name,
+					"description": description
+				}
+			};
 
-							var option = document.createElement("h4");
-							option.className = "am-article-meta blog-option";
-							var deleteOption = document.createElement("a");
-							deleteOption.className = "entry-collect-option";
-							deleteOption.text = "收藏";
-							deleteOption.id = objResult.resResult.curData.content[i].entryId; //文章ID
-							option.appendChild(deleteOption);
+			$.ajax({
+				url: "http://120.79.191.240:8089/rssbackend/api/v1/group/update",
+				data: JSON.stringify(objParam),
+				datatype: "json",
+				type: "POST",
+				async: false, //是否异步请求
+				contentType: "application/json",
+				success: function (objResult) {
+					document.getElementById("group-name").innerText = objResult.resResult.curData.name;
+					document.getElementById("group-description").innerText = objResult.resResult.curData.description;
 
-							var hr = document.createElement("hr");
-							hr.className = "am-article-divider blog-hr";
+					document.getElementById(groupId).innerText = objResult.resResult.curData.name;
+					window.location.href = "Group.html?" + document.URL.split("?")[1];
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+		}
+	</script>
 
-							articles.appendChild(article);
-							articles.appendChild(option);
-							articles.appendChild(hr);
-						}
-
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(XMLHttpRequest.status);
-					}
-				});
-			}
-
-			//新建小组
-			function Save() {
-				var reqId = "1";
-				var reqType = "Save";
-				var name = document.getElementById("new-groupName").value;
-				var description = document.getElementById("new-groupdescription").value;
-				var userId = document.URL.split("?")[1];
-
-				var objParam = {
-					"reqId": reqId,
-					"reqType": reqType,
-					"reqParam": {
-						"name": name,
-						"description": description
-					},
-					"reqUserInfo": {
-						"userId": userId
-					}
-				};
-
-				$.ajax({
-					url: "http://120.79.191.240:8089/rssbackend/api/v1/group",
-					data: JSON.stringify(objParam),
-					datatype: "json",
-					type: "POST",
-					async: false, //是否异步请求
-					contentType: "application/json",
-					success: function(objResult) {
-						window.location.href = "Group.html?" + document.URL.split("?")[1];
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(XMLHttpRequest.status);
-					}
-				});
-			}
-
-			//更新小组信息
-			function Update() {
-				var reqId = "1";
-				var reqType = "Update";
-				var groupId = document.getElementById("group-name").getAttribute("value");;
-				var name = document.getElementById("edit-title").value;
-				var description = document.getElementById("edit-description").value;;
-				var objParam = {
-					"reqId": reqId,
-					"reqType": reqType,
-					"reqParam": {
-						"groupId": groupId,
-						"name": name,
-						"description": description
-					}
-				};
-
-				$.ajax({
-					url: "http://120.79.191.240:8089/rssbackend/api/v1/group/update",
-					data: JSON.stringify(objParam),
-					datatype: "json",
-					type: "POST",
-					async: false, //是否异步请求
-					contentType: "application/json",
-					success: function(objResult) {
-						document.getElementById("group-name").innerText = objResult.resResult.curData.name;
-						document.getElementById("group-description").innerText = objResult.resResult.curData.description;
-
-						document.getElementById(groupId).innerText = objResult.resResult.curData.name;
-						window.location.href = "Group.html?" + document.URL.split("?")[1];
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(XMLHttpRequest.status);
-					}
-				});
-			}
-		</script>
-
-	</body>
+</body>
 
 </html>

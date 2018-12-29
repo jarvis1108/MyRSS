@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
   <meta charset="UTF-8">
   <title>Share | My RSS</title>
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="assets/css/amazeui.min.css" />
   <link rel="stylesheet" href="assets/css/Share.css" />
 </head>
+
 <body>
   <!-- header -->
   <header class="am-topbar">
@@ -24,182 +26,185 @@
 
     <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
       <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
-		  	<li><a href="Home_Page.html">发现</a></li>
-	        <li class="am-active"><a href="Share.html">分享</a></li>
-	        <li><a href="Collection.html">收藏</a></li>
-	        <li><a href="Group.html">小组</a></li>
-			<li><a href="Source.html">来源</a></li>			
-			<li><a href="Personal_information.html" >个人信息</a></li>
+        <li><a href="Home_Page.html">发现</a></li>
+        <li class="am-active"><a href="Share.html">分享</a></li>
+        <li><a href="Collection.html">收藏</a></li>
+        <li><a href="Group.html">小组</a></li>
+        <li><a href="Source.html">来源</a></li>
+        <li><a href="Personal_information.html">个人信息</a></li>
       </ul>
-		</div>	
+    </div>
   </header>
-  
-<script>
-	licolection = document.getElementById("nav").childNodes;
-	for (i = 0; i < parseInt(licolection.length / 2); ++i) {
-		element = licolection[i*2 + 1].childNodes[0];
-		element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
-	}
-</script>
 
-<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+    function Logincheck() {
+      var userId = document.URL.split("html")[1];
+      if (userId == "") {
+        alert("请先登录或注册！");
+        window.location.href = "Login.html";
+      }
+    }
+    Logincheck();
+
+    licolection = document.getElementById("nav").childNodes;
+    for (i = 0; i < parseInt(licolection.length / 2); ++i) {
+      element = licolection[i * 2 + 1].childNodes[0];
+      element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 
-<div id="arctileList">
+  <div id="arctileList">
     <article class="blog-main">
-        <h3 class="am-article-title" id="title_1">
-        </h3>
-        <h4 class="am-article-meta blog-meta" id="createTime_1">
-        </h4>
-        <div class="am-g blog-content">
-          <div class="am-u-lg-12">
-            <p id="description_1"></p>
-          </div>
+      <h3 class="am-article-title" id="title_1">
+      </h3>
+      <h4 class="am-article-meta blog-meta" id="createTime_1">
+      </h4>
+      <div class="am-g blog-content">
+        <div class="am-u-lg-12">
+          <p id="description_1"></p>
         </div>
-      </article>
+      </div>
+    </article>
 
     <hr class="am-article-divider blog-hr">
-	
+
     <article class="blog-main">
-        <h3 class="am-article-title" id="title_2">
-          身邊的字體: Arial (上)
-        </h3>
-        <h4 class="am-article-meta blog-meta" id="createTime_2">createTime: 2018/08/20
-        </h4>
-        <div class="am-g blog-content">
-          <div class="am-u-lg-12">
-            <p id="description_2">这次要介绍的是大家似乎都狠熟悉却又狠陌生的字体：Arial。不只是对 Typography
-              特别有兴趣的人、碰过排版的人，就算毫无接触，只要打开过电脑的字型选单，应该都有看过这个字型吧。尤其它还是以 A 开头，总是会出现在选单最前面。</p>
-          </div>
+      <h3 class="am-article-title" id="title_2">
+        身邊的字體: Arial (上)
+      </h3>
+      <h4 class="am-article-meta blog-meta" id="createTime_2">createTime: 2018/08/20
+      </h4>
+      <div class="am-g blog-content">
+        <div class="am-u-lg-12">
+          <p id="description_2">这次要介绍的是大家似乎都狠熟悉却又狠陌生的字体：Arial。不只是对 Typography
+            特别有兴趣的人、碰过排版的人，就算毫无接触，只要打开过电脑的字型选单，应该都有看过这个字型吧。尤其它还是以 A 开头，总是会出现在选单最前面。</p>
         </div>
-      </article>
-	  
-	<hr class="am-article-divider blog-hr">
-	
+      </div>
+    </article>
+
+    <hr class="am-article-divider blog-hr">
+
     <article class="blog-main">
-        <h3 class="am-article-title" id="title_3">
-        </h3>
-        <h4 class="am-article-meta blog-meta" id="createTime_3">
-        </h4>
-        <div class="am-g blog-content">
-          <div class="am-u-lg-12">
-            <p id="description_3"></p>
-          </div>
+      <h3 class="am-article-title" id="title_3">
+      </h3>
+      <h4 class="am-article-meta blog-meta" id="createTime_3">
+      </h4>
+      <div class="am-g blog-content">
+        <div class="am-u-lg-12">
+          <p id="description_3"></p>
         </div>
-      </article>
-	  
-	<hr class="am-article-divider blog-hr">
-	
+      </div>
+    </article>
+
+    <hr class="am-article-divider blog-hr">
+
     <article class="blog-main">
-        <h3 class="am-article-title" id="title_4">
-        </h3>
-        <h4 class="am-article-meta blog-meta" id="createTime_4">
-        </h4>
-        <div class="am-g blog-content">
-          <div class="am-u-lg-12">
-            <p id="description_4"></p>
-          </div>
+      <h3 class="am-article-title" id="title_4">
+      </h3>
+      <h4 class="am-article-meta blog-meta" id="createTime_4">
+      </h4>
+      <div class="am-g blog-content">
+        <div class="am-u-lg-12">
+          <p id="description_4"></p>
         </div>
-      </article>
-	  
-	<hr class="am-article-divider blog-hr">
-	
+      </div>
+    </article>
+
+    <hr class="am-article-divider blog-hr">
+
     <article class="blog-main">
-        <h3 class="am-article-title" id="title_5">
-        </h3>
-        <h4 class="am-article-meta blog-meta" id="createTime_5">
-        </h4>
-        <div class="am-g blog-content">
-          <div class="am-u-lg-12">
-            <p id="description_5"></p>
-          </div>
+      <h3 class="am-article-title" id="title_5">
+      </h3>
+      <h4 class="am-article-meta blog-meta" id="createTime_5">
+      </h4>
+      <div class="am-g blog-content">
+        <div class="am-u-lg-12">
+          <p id="description_5"></p>
         </div>
-      </article>	
-</div>
-	
-	
-<div class="page-btn">
+      </div>
+    </article>
+  </div>
+
+
+  <div class="page-btn">
     <ul class="am-pagination blog-pagination">
       <li class="am-pagination-prev"><a href="javascript:void(0)" onclick="goLastPage()">&laquo; 上一页</a></li>
       <li class="am-pagination-next"><a href="javascript:void(0)" onclick="goNextPage()">下一页 &raquo;</a></li>
     </ul>
-</div> 
+  </div>
 
-<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
-<script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
 
-var pageNum = 1;
+    var pageNum = 1;
 
-function ListAllPublic(pageNum)
-{
-	var reqId = "1";
-    var reqType = "ListAllPublic";
-    var publicStatus = "-1";
-    var device = "pc";
-    var pageSize = 5; 
+    function ListAllPublic(pageNum) {
+      var reqId = "1";
+      var reqType = "ListAllPublic";
+      var publicStatus = "-1";
+      var device = "pc";
+      var pageSize = 5;
 
-    $.ajax
-    ({
-        url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/list/allPublic",    
-        data:
-		{
-			reqId: reqId,
-			reqType: reqType,
-			reqParam: JSON.stringify
-			({
-				"device": device
-            }),
-            reqPageInfo:JSON.stringify
-			({
-              "pageSize": pageSize,
-              "pageNum": pageNum
-            })
-		},  
-        datatype: "json",
-        type: "GET",
-        contentType: "application/json",
-        success: function (objResult) 
-		{
-            var div = document.getElementById("articleList");
-            for(var i = 0; i < objResult.resResult.curData.totalElements; i++)
-			{				
-				var order = i + 1;
-				var titleId = "title_" + order;
-				var createTimeId = "createTime_" + order;
-				var descriptionId = "description_" + order;			
-				
-				document.getElementById(titleId).innerText = objResult.resResult.curData.content[i].name;
-				document.getElementById(createTimeId).innerText = "CreateTime: " + objResult.resResult.curData.content[i].createTime;
-				document.getElementById(descriptionId).innerText = objResult.resResult.curData.content[i].description;		
-            }            
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/collection/list/allPublic",
+          data:
+          {
+            reqId: reqId,
+            reqType: reqType,
+            reqParam: JSON.stringify
+              ({
+                "device": device
+              }),
+            reqPageInfo: JSON.stringify
+              ({
+                "pageSize": pageSize,
+                "pageNum": pageNum
+              })
           },
-		error: function (XMLHttpRequest, textStatus, errorThrown)
-		{
+          datatype: "json",
+          type: "GET",
+          contentType: "application/json",
+          success: function (objResult) {
+            var div = document.getElementById("articleList");
+            for (var i = 0; i < objResult.resResult.curData.totalElements; i++) {
+              var order = i + 1;
+              var titleId = "title_" + order;
+              var createTimeId = "createTime_" + order;
+              var descriptionId = "description_" + order;
+
+              document.getElementById(titleId).innerText = objResult.resResult.curData.content[i].name;
+              document.getElementById(createTimeId).innerText = "CreateTime: " + objResult.resResult.curData.content[i].createTime;
+              document.getElementById(descriptionId).innerText = objResult.resResult.curData.content[i].description;
+            }
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert(XMLHttpRequest.status);
-        }
-    });
-}
+          }
+        });
+    }
 
-function goLastPage()
-{
-	if(pageNum == 1)
-		return;
-	else
-	{
-		pageNum--;
-		ListAllPublic(pageNum);
-	}
-}
+    function goLastPage() {
+      if (pageNum == 1)
+        return;
+      else {
+        pageNum--;
+        ListAllPublic(pageNum);
+      }
+    }
 
-function goNextPage()
-{
-	pageNum++;
-	ListAllPublic(pageNum);	
-}
+    function goNextPage() {
+      pageNum++;
+      ListAllPublic(pageNum);
+    }
 
-ListAllPublic(pageNum);
+    ListAllPublic(pageNum);
 
-</script>
-  
+  </script>
+
 </body>
+
 </html>

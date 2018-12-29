@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
   <meta charset="UTF-8">
   <title>Home_Page</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
   <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
-  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="assets/css/amazeui.min.css" />
   <style>
     .get {
       background: #1E5B94;
@@ -94,6 +94,7 @@
     }
   </style>
 </head>
+
 <body>
   <header class="am-topbar">
     <h1 class="am-topbar-brand">
@@ -105,37 +106,39 @@
 
     <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
       <ul id="nav" class="am-nav am-nav-pills am-topbar-nav">
- 		  	<li class="am-active"><a href="Home_Page.html">发现</a></li>
-	        <li><a href="Share.html">分享</a></li>
-	        <li><a href="Collection.html">收藏</a></li>
-	        <li><a href="Group.html">小组</a></li>
-			<li><a href="Source.html">来源</a></li>			
-			<li><a href="Personal_information.html" >个人信息</a></li>
+        <li class="am-active"><a href="Home_Page.html">发现</a></li>
+        <li><a href="Share.html">分享</a></li>
+        <li><a href="Collection.html">收藏</a></li>
+        <li><a href="Group.html">小组</a></li>
+        <li><a href="Source.html">来源</a></li>
+        <li><a href="Personal_information.html">个人信息</a></li>
       </ul>
     </div>
   </header>
 
 
-<div class="get">
-  <div class="am-g">
-    <div class="am-u-lg-12">
-      <h1 class="get-title">My RSS</h1>
-      <p><h3>Waiting for you</h3></p>
+  <div class="get">
+    <div class="am-g">
+      <div class="am-u-lg-12">
+        <h1 class="get-title">My RSS</h1>
+        <p>
+          <h3>Waiting for you</h3>
+        </p>
 
-      <p>
-        制造专属于你的信息聚合器
-      </p>
+        <p>
+          制造专属于你的信息聚合器
+        </p>
 
-      <p>
-        <a href="http://amazeui.org" class="am-btn am-btn-sm get-btn">输入RSS链接</a>
-      </p>
+        <p>
+          <a href="http://amazeui.org" class="am-btn am-btn-sm get-btn">输入RSS链接</a>
+        </p>
+      </div>
     </div>
   </div>
-</div>
-<div >
-   <hr class="am-article-divider blog-hr">
-   <div class="am-u-md-8" id = RSSDiv>
-      <div id = "RSSList">
+  <div>
+    <hr class="am-article-divider blog-hr">
+    <div class="am-u-md-8" id=RSSDiv>
+      <div id="RSSList">
         <!--
       <article class="blog-main">
         <h3 class="am-article-title blog-title">
@@ -192,9 +195,9 @@
     </div>
 
   </div>
-</div>
+  </div>
 
-<!--
+  <!--
 
 <div class="detail">
   <div class="am-g am-container">
@@ -306,136 +309,147 @@
 </footer>
 -->
 
-<!--[if lt IE 9]>
+  <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
-<!--<![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
-<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
-<script>
-  var pageNum = 1;
-  List();
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="assets/js/jquery.min.js"></script>
+  <!--<![endif]-->
+  <script src="assets/js/amazeui.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+    var pageNum = 1;
+    List();
 
-  function List(){
-    var reqId = "1";
-    var reqType = "List";
-    var device = "pc";
-    var userId = document.URL.split("?")[1];
-    var pageSize = 3;
+    function List() {
+      var reqId = "1";
+      var reqType = "List";
+      var device = "pc";
+      var userId = document.URL.split("?")[1];
+      var pageSize = 3;
 
-    var objParam = 
-    {
-      "reqId": reqId,
-      "reqType": reqType,
-      "reqParam":
+      var objParam =
       {
-        "userId": userId,
-        "device": device
-      },
-      "reqPageInfo":
-      {
-        "pageSize": pageSize,
-        "pageNum": pageNum
-      }
-    };
-
-    $.ajax
-    ({
-      url: "http://120.79.191.240:8089/rssbackend/api/v1/source/list/recommend",
-      data: {
-        reqId: reqId,
-        reqType: reqType,
-        reqParam: JSON.stringify(
+        "reqId": reqId,
+        "reqType": reqType,
+        "reqParam":
         {
           "userId": userId,
           "device": device
-        }),
-        reqPageInfo: JSON.stringify(
+        },
+        "reqPageInfo":
         {
           "pageSize": pageSize,
           "pageNum": pageNum
-        })
-      },
-      datatype: "json",
-      type: "GET",
-      async: false,
-      contentType: "application/json",
-      success: function(objResult) {
-        var RSSList = document.getElementById("RSSList");
-        RSSList.innerHTML = "";
-        for(var i = 0; i < objResult.resResult.curData.numberOfElements; i++){
-          var entry = document.createElement("article");
-          var link = document.createElement("a");
-          var htmlName = document.createElement("h1");
-          var htmlAdd = document.createElement("a");
-          var htmlLink = document.createElement("h4");
-          var htmlDescription = document.createElement("div");
-          var htmlDescription_1 = document.createElement("p");
-          var htmlNameLink = document.createElement("a");
-          var hr = document.createElement("hr");
-          hr.className = "am-article-divider blog-hr";
-
-          var name = objResult.resResult.curData.content[i].name;
-          var RSSLink = objResult.resResult.curData.content[i].link;
-          var description = objResult.resResult.curData.content[i].description;
-
-          htmlDescription_1.textContent= "摘要： " + description;
-          link.text = RSSLink;
-          link.href = RSSLink;
-          htmlName.textContent = name;
-          htmlNameLink.href = link;
-
-          htmlAdd.text = "收藏";
-          htmlAdd.href = "#";
-
-
-          htmlLink.appendChild(link);
-          htmlDescription.appendChild(htmlDescription_1);
-          entry.appendChild(htmlName);
-          entry.appendChild(htmlLink);
-          entry.appendChild(htmlDescription);
-          entry.appendChild(htmlAdd);
-          entry.appendChild(hr);
-          RSSList.appendChild(entry);
-
-
-
         }
+      };
 
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        alter(XMLHttpRequest.status);
+      $.ajax
+        ({
+          url: "http://120.79.191.240:8089/rssbackend/api/v1/source/list/recommend",
+          data: {
+            reqId: reqId,
+            reqType: reqType,
+            reqParam: JSON.stringify(
+              {
+                "userId": userId,
+                "device": device
+              }),
+            reqPageInfo: JSON.stringify(
+              {
+                "pageSize": pageSize,
+                "pageNum": pageNum
+              })
+          },
+          datatype: "json",
+          type: "GET",
+          async: false,
+          contentType: "application/json",
+          success: function (objResult) {
+            var RSSList = document.getElementById("RSSList");
+            RSSList.innerHTML = "";
+            for (var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
+              var entry = document.createElement("article");
+              var link = document.createElement("a");
+              var htmlName = document.createElement("h1");
+              var htmlAdd = document.createElement("a");
+              var htmlLink = document.createElement("h4");
+              var htmlDescription = document.createElement("div");
+              var htmlDescription_1 = document.createElement("p");
+              var htmlNameLink = document.createElement("a");
+              var hr = document.createElement("hr");
+              hr.className = "am-article-divider blog-hr";
+
+              var name = objResult.resResult.curData.content[i].name;
+              var RSSLink = objResult.resResult.curData.content[i].link;
+              var description = objResult.resResult.curData.content[i].description;
+
+              htmlDescription_1.textContent = "摘要： " + description;
+              link.text = RSSLink;
+              link.href = RSSLink;
+              htmlName.textContent = name;
+              htmlNameLink.href = link;
+
+              htmlAdd.text = "收藏";
+              htmlAdd.href = "#";
+
+
+              htmlLink.appendChild(link);
+              htmlDescription.appendChild(htmlDescription_1);
+              entry.appendChild(htmlName);
+              entry.appendChild(htmlLink);
+              entry.appendChild(htmlDescription);
+              entry.appendChild(htmlAdd);
+              entry.appendChild(hr);
+              RSSList.appendChild(entry);
+
+
+
+            }
+
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alter(XMLHttpRequest.status);
+          }
+        });
+
+    }
+
+    function goLastPage() {
+      if (pageNum == 1)
+        return;
+      else {
+        pageNum--;
+        List();
       }
-    });
+    }
 
-  }
-
-  function goLastPage() {
-    if(pageNum == 1)
-      return;
-    else {
-      pageNum--;
+    function goNextPage() {
+      pageNum++;
       List();
     }
-  }
 
-  function goNextPage() {
-    pageNum++;
-    List();
-  }
+  </script>
+  <script>
+    function Logincheck() {
+      var userId = document.URL.split("html")[1];
+      if (userId == "") {
+        alert("请先登录或注册！");
+        window.location.href = "Login.html";
+      }
+    }
+    Logincheck();
 
-</script>
-<script>
-	licolection = document.getElementById("nav").childNodes;
-	for (i = 0; i < parseInt(licolection.length / 2); ++i) {
-		element = licolection[i*2 + 1].childNodes[0];
-		element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
-	}
-</script>
+
+    licolection = document.getElementById("nav").childNodes;
+    for (i = 0; i < parseInt(licolection.length / 2); ++i) {
+      element = licolection[i * 2 + 1].childNodes[0];
+      element.setAttribute('href', element.getAttribute('href') + "?" + document.URL.split("?")[1])
+    }
+  </script>
 </body>
+
 </html>

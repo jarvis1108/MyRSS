@@ -317,6 +317,17 @@
   <script src="assets/js/amazeui.min.js"></script>
 
   <script>
+
+    function Logincheck() {
+      var userId = document.URL.split("html")[1];
+      if (userId == "") {
+        alert("请先登录或注册！");
+        window.location.href = "Login.html";
+      }
+    }
+    Logincheck();
+
+
     licolection = document.getElementById("nav").childNodes;
     for (i = 0; i < licolection.length / 2; ++i) {
       element = licolection[i * 2 + 1].childNodes[0];
@@ -660,8 +671,8 @@
               p.className = "blog-content";
               var description = objResult.resResult.curData.content[i].description;//文章内容
               //TODO: 过滤文本换行符
-              var dd=description.replace(/<\/?.+?>/g,"");
-              var dds=dd.replace(/ /g,"");//dds为得到后的内容
+              var dd = description.replace(/<\/?.+?>/g, "");
+              var dds = dd.replace(/ /g, "");//dds为得到后的内容
               p.innerText = dds;
               content.appendChild(p);
               article.appendChild(content);

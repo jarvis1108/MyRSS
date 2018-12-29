@@ -131,7 +131,7 @@
           <div class="am-panel-bd">
             <p>我们在首页上为你推荐了RSS源，你可以订阅到这里，以备以后查看。</p>
             <p>你也可以在这里导入自己喜欢的RSS源，注意：请输入标准RSS格式（xml格式）。</p>
-						<p>例如：http://www.people.com.cn/rss/politics.xml</p>
+            <p>例如：http://www.people.com.cn/rss/politics.xml</p>
             <button type="button" class="am-btn am-btn-success am-btn-sm" id="entry-save-toggle">导入RSS源</button>
           </div>
 
@@ -140,9 +140,9 @@
             <div class="am-modal-dialog">
               <div class="am-modal-hd">导入RSS源</div>
               <div class="am-modal-bd">
-                  <p>请输入RSS链接</p>
-                  <input type="text" class="am-modal-prompt-input" id="new-entry-link">
-                
+                <p>请输入RSS链接</p>
+                <input type="text" class="am-modal-prompt-input" id="new-entry-link">
+
               </div>
               <div class="am-modal-footer">
                 <span class="am-modal-btn" data-am-modal-confirm>导入</span>
@@ -159,7 +159,7 @@
             <!-- collection list -->
           </ul>
 
-          
+
         </section>
       </div>
     </div>
@@ -175,7 +175,7 @@
           </h3>
         </header>
         <div class="am-panel-bd">
-           <a id="collection-status"></a>
+          <a id="collection-status"></a>
         </div>
 
         <!-- collection delete confirm -->
@@ -193,7 +193,7 @@
         </div>
 
         <!-- edit confirm -->
-        
+
       </section>
 
       <section id="articles">
@@ -259,6 +259,15 @@
   <script src="assets/js/amazeui.min.js"></script>
 
   <script>
+    function Logincheck() {
+      var userId = document.URL.split("html")[1];
+      if (userId == "") {
+        alert("请先登录或注册！");
+        window.location.href = "Login.html";
+      }
+    }
+    Logincheck();
+
     licolection = document.getElementById("nav").childNodes;
     for (i = 0; i < licolection.length / 2; ++i) {
       element = licolection[i * 2 + 1].childNodes[0];
@@ -292,7 +301,7 @@
       });
     }
 
-    
+
 
     //DONE: collection-new-confirm
     var newStatus = 3;//编辑后的收藏夹权限
@@ -385,9 +394,9 @@
           "type": type,
           "device": device
         },
-				"reqUserInfo":{
-					"userId": userID
-				},
+        "reqUserInfo": {
+          "userId": userID
+        },
         "reqPageInfo":
         {
           "pageSize": pageSize,
@@ -407,10 +416,10 @@
                 "device": device,
                 "type": type
               }),
-						reqUserInfo: JSON.stringify(
-							{
-								"userId": userID
-							}),
+            reqUserInfo: JSON.stringify(
+              {
+                "userId": userID
+              }),
             reqPageInfo: JSON.stringify(
               {
                 "pageSize": pageSize,
@@ -427,12 +436,12 @@
             for (var i = 0; i < objResult.resResult.curData.numberOfElements; i++) {
               var collection = document.createElement("li");
               var link = document.createElement("a");
-							var rsslink = objResult.resResult.curData.content[i].link;
+              var rsslink = objResult.resResult.curData.content[i].link;
               var id = objResult.resResult.curData.content[i].sourceId;//收藏夹ID 
               var name = objResult.resResult.curData.content[i].name;//收藏夹名字
               link.id = id;
               link.text = name;
-							link.setAttribute("value", rsslink);
+              link.setAttribute("value", rsslink);
               link.setAttribute("onclick", "changeCollection(this)");
               if (i == 0) {
                 collection.className = "am-active";//默认激活第一个收藏夹
@@ -452,7 +461,7 @@
         });
     }
 
-    
+
 
     function changeCollection(obj) {
       var collectionId = document.getElementById("collection-name").getAttribute("value");
@@ -561,7 +570,7 @@
               content.appendChild(p);
               article.appendChild(content);
 
-             
+
 
               var hr = document.createElement("hr");
               hr.className = "am-article-divider blog-hr";
@@ -578,7 +587,7 @@
         });
     }
 
-    
+
 
     //刷新
     function BatchRefresh() {
@@ -604,7 +613,7 @@
           type: "POST",
           contentType: "application/json",
           success: function (objResult) {
-						alert("刷新成功！");
+            alert("刷新成功！");
             window.location.href = "Source.html?" + document.URL.split("?")[1];
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -650,7 +659,7 @@
       var reqId = "1";
       var reqType = "SingleLink";
       var link = document.getElementById("new-entry-link").value;
-      var userId= document.URL.split("?")[1];
+      var userId = document.URL.split("?")[1];
 
       var objParam =
       {
@@ -660,9 +669,9 @@
         {
           "link": link,
         },
-				"reqUserInfo":{
-					"userId": userId
-				}
+        "reqUserInfo": {
+          "userId": userId
+        }
       };
 
       $.ajax
@@ -681,7 +690,7 @@
         });
     }
 
-   
+
   </script>
 
 
